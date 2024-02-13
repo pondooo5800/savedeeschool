@@ -33,6 +33,7 @@ use App\Http\Controllers\EmailController;
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/about', [FrontendController::class, 'about']);
 Route::get('about/{detail_id}', [FrontendController::class, 'about']);
+Route::get('course_detail/{course_detail}', [FrontendController::class, 'course_detail'])->name('courses.detail');
 Route::get('contact', [FrontendController::class, 'contact']);
 Route::get('video', [FrontendController::class, 'video']);
 Route::get('gallery', [FrontendController::class, 'gallery']);
@@ -47,7 +48,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');;
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('course', CourseController::class);
     Route::get('/course_search', [CourseController::class, 'course_search']);
     Route::post('/course/{id}/enroll', [CourseController::class, 'enroll'])->name('course.enroll');

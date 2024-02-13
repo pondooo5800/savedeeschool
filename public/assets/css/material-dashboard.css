@@ -52,7 +52,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Kanit",sans-serif;
+  font-family: "Kanit", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -473,7 +473,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Kanit",sans-serif;
+  font-family: "Kanit", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -5886,7 +5886,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Kanit",sans-serif;
+  font-family: "Kanit", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -6011,7 +6011,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Kanit",sans-serif;
+  font-family: "Kanit", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -9384,7 +9384,7 @@ a.text-warning:focus {
 }
 
 .text-danger {
-  color: #184784 !important;
+  color: #ea1c0d !important;
 }
 
 a.text-danger:hover,
@@ -14359,7 +14359,7 @@ h6,
 .h2,
 .h3,
 .h4 {
-  font-family: "Kanit",sans-serif;
+  font-family: "Kanit", sans-serif;
   font-weight: 300;
   line-height: 1.5em;
 }
@@ -14444,7 +14444,7 @@ h2.title {
 }
 
 .text-danger {
-  color: #184784 !important;
+  color: #ea1c0d !important;
 }
 
 .text-success {
@@ -16995,7 +16995,7 @@ legend {
 }
 
 .serif-font {
-  font-family: "Kanit",sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 * {

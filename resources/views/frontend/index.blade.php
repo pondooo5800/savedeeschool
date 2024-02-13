@@ -29,164 +29,20 @@
             <h3 class="text-primary" style="font-family: 'Kanit'">หลักสูตรที่เปิดสอน</h3>
         </div>
         <div class="row g-5 services-inner">
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
+            @foreach ($courses as $index => $course)
+            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".2s">
                 <div class="services-item bg-light">
                     <div class="p-4 text-center services-content">
                         <div class="services-content-icon">
-                                <img src="{{ asset('assets/img/course/Icon-10_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
+                            <img src="{{ asset('courses/'.$course->imageName) }}" class="img-fluid" alt="First slide">
+                            <h4 class="m-3 font-text">{{$course->title}}</h4>
+                            <p class="mb-4 text-start">{{ \Illuminate\Support\Str::limit($course->description, 150) }}</p>
+                            <a href="{{ route('courses.detail', $course->id) }}" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-11_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".7s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-1_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-2_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-3_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".7s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-4_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-5_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-6_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".7s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-7_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-8_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-9_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".7s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('assets/img/course/Icon-10_0.jpg')}}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">หลักสูตรรถจักรยานยนต์ 15 ชม.</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum.
-                                Aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

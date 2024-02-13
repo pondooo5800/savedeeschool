@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Slide;
+use App\Models\Course;
 
 
 class FrontendController extends Controller
@@ -21,7 +22,12 @@ class FrontendController extends Controller
     public function index()
     {
         $slide = Slide::all();
-        return view('frontend.index')->with('slides', $slide);
+        $cours = Course::all();
+
+        return view('frontend.index')->with([
+        'slides' => $slide,
+        'courses' => $cours
+        ]);
     }
     public function about($id = null)
     {
@@ -39,6 +45,15 @@ class FrontendController extends Controller
             return view('frontend.about');
 
         }
+    }
+    public function course_detail($id)
+    {
+         $course = Course::find($id);
+         $coursAll = Course::all();
+         return view('frontend.course_detail')->with([
+         'course' => $course,
+         'coursAll' => $coursAll
+         ]);
     }
     public function contact()
     {

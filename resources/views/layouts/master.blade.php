@@ -24,12 +24,7 @@
     <link href="{{ asset('assets/css/material-dashboard.css?v=2.1.2') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <style>
-    .ck-editor__editable_inline{
-        height: 150px;
-    }
-    </style>
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
 <body class="">
     <div class="wrapper ">
@@ -64,7 +59,7 @@
                                     <div class="dropdown-divider"></div> --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        ออกจากระบบ
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -132,7 +127,15 @@
     <!--  Notifications Plugin    -->
     <script src="{{ asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('assets/js/material-dashboard.js?v=2.1.2') }}" type="text/javascript"></script>
+    @php
+        $currentPath = request()->path();
+        $firstSegment = request()->segment(1);
+        $lastSegment = request()->segment(3);
+    @endphp
+    @if ($currentPath === 'course/create' || ($firstSegment === 'course' && $lastSegment === 'edit'))
+    @else
+        <script src="{{ asset('assets/js/material-dashboard.js?v=2.1.2') }}" type="text/javascript"></script>
+    @endif
     <!-- DataTable -->
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
@@ -152,13 +155,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"
         integrity="sha512-FJ2OYvUIXUqCcPf1stu+oTBlhn54W0UisZB/TNrZaVMHHhYvLBV9jMbvJYtvDe5x/WVaoXZ6KB+Uqe5hT2vlyA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
-        ClassicEditor
-        .create(document.querySelector('textarea'))
-    		.catch( error => {
-    			console.error( error );
-    		} );
+        $('#summernote').summernote({
+                        tabsize: 2,
+                        height: 500
+                      });
+    </script>
     </script>
     @yield('scripts')
 </body>

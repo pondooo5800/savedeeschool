@@ -27,7 +27,7 @@
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong class="text-danger">{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -44,22 +44,22 @@
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong class="text-danger">{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
+                                <div class="col-md-12 text-center">
                                     <button type="submit" class="btn btn-darken">
-                                        {{ __('Login') }}
+                                       เข้าสู่ระบบ
                                     </button>
 
-                                    @if (Route::has('password.request'))
+                                    {{-- @if (Route::has('password.request'))
                                         <a class="btn btn-darken" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                         </form>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
-use App\Models\Student;
+use DOMDocument;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 class CourseController extends Controller
 {
     //
@@ -20,6 +22,7 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         // $courses = Course::latest()->paginate(5);
@@ -49,17 +52,40 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->input());
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
+                $request->validate([
+                    'title' => 'required',
+                    'description' => 'required',
+                    'image' => 'required',
+                    'content' => 'required',
+                ]);
 
-        Course::create($request->all());
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move(public_path('courses'), $imageName);
+            $dom = new DOMDocument();
+            $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES','UTF-8'));
 
+            $images = $dom->getElementsByTagName('img');
+
+            foreach ($images as $key => $img) {
+            $data = base64_decode(explode(',',explode(';',$img->getAttribute('src'))[1])[1]);
+            $image_name = "/courses/" . time(). $key.'.png';
+            file_put_contents(public_path().$image_name,$data);
+
+            $img->removeAttribute('src');
+            $img->setAttribute('src',$image_name);
+            }
+            $content = $dom->saveHTML();
+
+            Course::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'imageName' => $imageName,
+            'content' => $content
+            ]);
         return redirect()->route('course.index')
             ->with('success', 'สร้างหลักสูตรสำเร็จแล้ว');
     }
+
 
     /**
      * Display the specified resource.
@@ -92,11 +118,39 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-        $course->update($request->all());
+                        $request->validate([
+                        'title' => 'required',
+                        'description' => 'required',
+                        'content' => 'required',
+                        ]);
+                         $content = $request->content;
+                $dom = new DOMDocument();
+                    $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES','UTF-8'));
+
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img) {
+
+            // Check if the image is a new one
+            if (strpos($img->getAttribute('src'),'data:image/') ===0) {
+
+                $data = base64_decode(explode(',',explode(';',$img->getAttribute('src'))[1])[1]);
+                $image_name = "/courses/" . time(). $key.'.png';
+                file_put_contents(public_path().$image_name,$data);
+
+                $img->removeAttribute('src');
+                $img->setAttribute('src',$image_name);
+            }
+
+        }
+        $content = $dom->saveHTML();
+                   $course->update([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'content' => $content
+                    ]);
+
         return redirect()->route('course.index')
             ->with('success', 'แก้ไขหลักสูตรเรียบร้อยแล้ว');
     }
@@ -109,6 +163,23 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
+        $dom= new DOMDocument();
+        $dom->loadHTML(mb_convert_encoding($course->content, 'HTML-ENTITIES','UTF-8'));
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img) {
+
+        $src = $img->getAttribute('src');
+        $path = Str::of($src)->after('/');
+
+
+        if (File::exists($path)) {
+        File::delete($path);
+
+        }
+        }
+
         $course->delete();
 
         return redirect()->route('course.index')

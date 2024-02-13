@@ -41,8 +41,8 @@
                             <a href="{{ url('video') }}" class="dropdown-item">Video</a>
                         </div>
                     </div>
-                    <a href="{{'register'}}" class="nav-item nav-link">ฝึกทำข้อสอบ</a>
-                    <a href="{{'contact'}}" class="nav-item nav-link {{ (request()->is('contact*')) ? 'active text-secondary' : '' }}">ติตต่อเรา</a>
+                    <a href="{{ url('register') }}" class="nav-item nav-link">ฝึกทำข้อสอบ</a>
+                    <a href="{{url('contact')}}" class="nav-item nav-link {{ (request()->is('contact*')) ? 'active text-secondary' : '' }}">ติตต่อเรา</a>
                 </div>
             </div>
             <div class="d-none d-xl-flex flex-shirink-0">

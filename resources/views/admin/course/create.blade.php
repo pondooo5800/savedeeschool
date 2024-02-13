@@ -30,22 +30,35 @@ Add Course | {{ config('settings.name', 'Laravel') }}
                     </ul>
                 </div>
                 @endif
-                <form action="{{ route('course.store') }}" method="POST">
+                <form action="{{ route('course.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>หัวข้อหลักสูตร:</strong>
+                                <strong>หัวข้อหลักสูตร : <span class="text-danger"> * </span></strong>
                                 <input type="text" name="title" class="form-control" placeholder="หัวข้อหลักสูตร"
                                     value="{{old('title')}}">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>รายละเอียด:</strong>
-                                <textarea id="editor" class="form-control" name="description"
+                                <strong>รายละเอียด : <span class="text-danger"> * </span></strong>
+                                <textarea class="form-control" name="description"
                                     placeholder="รายละเอียด">{{old('description')}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>รูปภาพ : <span class="text-danger"> * </span></strong>
+                                <input type="file" name="image" accept="image/*" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>รายละเอียด (แสดงหน้าเว็บไซต์) : <span class="text-danger"> * </span></strong>
+                                <textarea id="summernote" class="form-control" name="content"
+                                    placeholder="รายละเอียด (แสดงหน้าเว็บไซต์)">{{old('content')}}</textarea>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

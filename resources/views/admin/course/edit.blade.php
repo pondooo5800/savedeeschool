@@ -50,20 +50,13 @@
                                     placeholder="description">{{ $course->description }}</textarea>
                             </div>
                         </div>
-                        {{-- <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Instructor:</strong>
-                                <input type="text" value="{{ $course->instructor }}" name="instructor"
-                                    class="form-control" placeholder="Instructor">
-                            </div>
-                        </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Price:</strong>
-                                <input type="number" name="price" step='0.01' value="{{ $course->price }}"
-                                    class="form-control" placeholder="Put the price">
+                                <strong>รายละเอียด (แสดงหน้าเว็บไซต์):</strong>
+                                <textarea id="summernote" class="form-control" name="content"
+                                    placeholder="รายละเอียด (แสดงหน้าเว็บไซต์)">{{ $course->content }}</textarea>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-darken">ตกลง</button>
                         </div>
