@@ -60,6 +60,9 @@ Course | {{ config('settings.name', 'Laravel') }}
                             <th>
                                 หลักสูตร
                             </th>
+                            <th>
+                                ภาพปก
+                            </th>
                             <th class="text-right not-export-col" style="width: 10%;">
 
                             </th>
@@ -72,6 +75,11 @@ Course | {{ config('settings.name', 'Laravel') }}
                                 </td>
                                 <td>
                                     {{ $row->title }}
+                                </td>
+                                <td>
+                                    <div class="qns-img text-center">
+                                        <img src="{{ asset('courses/'.$row->imageName) }}" style="width: 200px;">
+                                    </div>
                                 </td>
                                 <td class="text-right ">
                                     <a class="btn-icon btn-darken" href="{{ route('course.edit', $row->id) }}"
@@ -98,7 +106,7 @@ Course | {{ config('settings.name', 'Laravel') }}
 
 @section('scripts')
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
     $('#coursetable').DataTable({
         dom: "Blfrtip",
         buttons: [{

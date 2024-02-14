@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-ตั้งค่า หลักสูตรที่เปิด | {{ config('settings.name', 'Laravel') }}
+ตั้งค่า บทความ (รอบรู้เรื่องขับขี่) | {{ config('settings.name', 'Laravel') }}
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="course_delete_modal" method="POST">
+            <form id="blog_delete_modal" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
@@ -36,11 +36,11 @@
         <div class="card">
             <div class="card-header">
                 <div class="pull-left">
-                    <h2 class="card-title"><i class="material-icons">settings</i> หลักสูตรที่เปิด</h2>
+                    <h2 class="card-title"><i class="material-icons">settings</i> บทความ (รอบรู้เรื่องขับขี่)</h2>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-darken" href="{{ route('courseopen.create') }}" title="เพิ่ม หลักสูตรที่เปิด"> <i
-                            class="material-icons">add</i> เพิ่ม หลักสูตรที่เปิด
+                    <a class="btn btn-darken" href="{{ route('blog.create') }}" title="เพิ่ม บทความ (รอบรู้เรื่องขับขี่)"> <i
+                            class="material-icons">add</i> เพิ่ม บทความ (รอบรู้เรื่องขับขี่)
                     </a>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         <thead class="text-darken">
                             <th style="width:10%">ลำดับ</th>
                             <th>
-                                ชื่อ
+                                ชื่อบทความ
                             </th>
                             <th>
                                 ภาพปก
@@ -68,7 +68,7 @@
                             </th>
                         </thead>
                         <tbody>
-                            @foreach ($courseopens ?? '' as $row)
+                            @foreach ($blogs ?? '' as $row)
                             <tr>
                                 <td>
                                     {{ $loop->index + 1 }}
@@ -78,17 +78,17 @@
                                 </td>
                                 <td>
                                     <div class="qns-img text-center">
-                                        <img src="{{ asset('courseopens/'.$row->image_name) }}" style="width: 200px;">
+                                        <img src="{{ asset('blogs/'.$row->imageName) }}" style="width: 200px;">
                                     </div>
                                 </td>
                                 <td class="text-right ">
-                                    <a class="btn-icon btn-darken" href="{{ route('courseopen.edit', $row->id) }}"
+                                    <a class="btn-icon btn-darken" href="{{ route('blog.edit', $row->id) }}"
                                         title="Edit">
                                         <i class="material-icons">edit</i>
                                     </a>
 
                                     <a class="deletebtn btn-icon btn-darken"
-                                        data-action="{{ route('courseopen.destroy', $row->id) }}" href="#" title="Delete">
+                                        data-action="{{ route('blog.destroy', $row->id) }}" href="#" title="Delete">
                                         <i class="material-icons">delete</i>
                                     </a>
                                 </td>
@@ -161,7 +161,7 @@ $(document).ready(function() {
 
     $('#coursetable').on('click', '.deletebtn', function() {
         $action = $(this).attr("data-action");
-        $('#course_delete_modal').attr('action', $action);
+        $('#blog_delete_modal').attr('action', $action);
         $('#deletemodal').modal('show');
     });
 

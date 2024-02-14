@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-ตั้งค่า หลักสูตรที่เปิด | {{ config('settings.name', 'Laravel') }}
+ตั้งค่า บทความ (รอบรู้เรื่องขับขี่) | {{ config('settings.name', 'Laravel') }}
 @endsection
 
 @section('content')
@@ -10,10 +10,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="pull-left">
-                    <h4 class="card-title"><i class="material-icons">settings</i> หลักสูตรที่เปิด</h4>
+                    <h4 class="card-title"><i class="material-icons">settings</i> บทความ (รอบรู้เรื่องขับขี่)</h4>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-darken" href="{{ route('courseopen.index') }}"> กลับ</a>
+                    <a class="btn btn-darken" href="{{ route('blog.index') }}"> กลับ</a>
                 </div>
             </div>
             <div class="card-body">
@@ -30,30 +30,31 @@
                     </ul>
                 </div>
                 @endif
-                <form action="{{ route('courseopen.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>ชื่อหลักสูตร:</strong>
+                                <strong>ชื่อบทความ : <span class="text-danger"> * </span></strong>
                                 <input type="text" name="title" class="form-control" placeholder="ชื่อหลักสูตร"
                                     value="{{old('title')}}">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>รายละเอียด:</strong>
-                                <textarea class="form-control" name="description"
-                                    placeholder="รายละเอียด">{{old('description')}}</textarea>
+                                <strong>ภาพปก:</strong>
+                               <input type="file" name="image" accept="image/*" class="form-control">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>ภาพปก:</strong>
-                                <input type="file" name="image" accept="image/*" class="form-control">
+                                <strong>รายละเอียด : <span class="text-danger"> * </span></strong>
+                                <textarea id="summernote" class="form-control" name="description"
+                                    placeholder="รายละเอียด">{{old('description')}}</textarea>
                             </div>
                         </div>
+
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-darken">ตกลง</button>
                         </div>

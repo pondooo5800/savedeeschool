@@ -66,14 +66,12 @@
                 <ul class="nav">
                   <li class="nav-item {{ Request::is('slide/*') || Request::is('slide') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('slide.index') }}">
-                      <span class="sidebar-mini"> IMG </span>
-                      <span class="sidebar-normal"> ภาพสไลด์ </span>
+                      <span class="sidebar-normal"> ภาพสไลด์โชว์ </span>
                     </a>
                   </li>
-                  <li class="nav-item {{ Request::is('courseopen/*') || Request::is('courseopen') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('courseopen.index') }}">
-                      <span class="sidebar-mini"> C </span>
-                      <span class="sidebar-normal"> หลักสูตรที่เปิด </span>
+                  <li class="nav-item {{ Request::is('blog/*') || Request::is('blog') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('blog.index') }}">
+                      <span class="sidebar-normal"> บทความ (รอบรู้เรื่องขับขี่) </span>
                     </a>
                   </li>
 

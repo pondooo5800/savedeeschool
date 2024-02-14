@@ -47,7 +47,7 @@
     </div>
 </div>
 
-{{-- <div class="container-fluid blog py-5 mb-3">
+<div class="container-fluid blog py-5 mb-3">
     <div class="container">
         <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
             <h3 class="text-primary" style="font-family: 'Kanit'">รอบรู้เรื่องขับขี่</h3>
@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>
- --}}
+
 
 
 @section('scripts')

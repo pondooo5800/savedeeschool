@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SlidesController;
 use App\Http\Controllers\Admin\RatingController;
-use App\Http\Controllers\Admin\CourseopenController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\EmailController;
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/search', [StudentController::class, 'search']);
     Route::resource('settings', SettingsController::class);
     Route::resource('slide', SlidesController::class);
-    Route::resource('courseopen', CourseopenController::class);
+    Route::resource('blog', BlogController::class);
 
 
 });

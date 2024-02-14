@@ -54,9 +54,6 @@
                                     </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                    {{-- <a class="dropdown-item" href="#">Profile</a>
-                                    <a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a>
-                                    <div class="dropdown-divider"></div> --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                         ออกจากระบบ
@@ -129,10 +126,10 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     @php
         $currentPath = request()->path();
-        $firstSegment = request()->segment(1);
+        $firstSegment = request()->segment(2);
         $lastSegment = request()->segment(3);
     @endphp
-    @if ($currentPath === 'course/create' || ($firstSegment === 'course' && $lastSegment === 'edit'))
+    @if ($firstSegment === 'create' || $lastSegment === 'edit')
     @else
         <script src="{{ asset('assets/js/material-dashboard.js?v=2.1.2') }}" type="text/javascript"></script>
     @endif

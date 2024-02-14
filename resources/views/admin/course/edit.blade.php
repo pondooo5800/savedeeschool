@@ -51,6 +51,13 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>รูปภาพ : <span class="text-danger"> * </span></strong>
+                                        <input type="file" name="image" accept="image/*" class="form-control">
+                                    </div>
+                                    <img src="{{ asset('courses/'.$course->imageName) }}" class="img-fluid img-thumbnail" style="width: 400px;">
+                                </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>รายละเอียด (แสดงหน้าเว็บไซต์):</strong>
                                 <textarea id="summernote" class="form-control" name="content"

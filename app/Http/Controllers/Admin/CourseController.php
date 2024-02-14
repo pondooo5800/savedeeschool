@@ -8,6 +8,7 @@ use App\Models\Course;
 use DOMDocument;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+
 class CourseController extends Controller
 {
     //
@@ -17,7 +18,7 @@ class CourseController extends Controller
         return view('admin.course.list')->with('courses', $courses);
     }
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -52,36 +53,40 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-                $request->validate([
-                    'title' => 'required',
-                    'description' => 'required',
-                    'image' => 'required',
-                    'content' => 'required',
-                ]);
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'content' => 'required',
+        ]);
 
-                $imageName = time().'.'.$request->image->extension();
-                $request->image->move(public_path('courses'), $imageName);
-            $dom = new DOMDocument();
-            $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES','UTF-8'));
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = rand() . '.' . $file->getClientOriginalName();
+            $request->merge([
+                'imageName' => $filename
+            ]);
 
-            $images = $dom->getElementsByTagName('img');
+            $file->move(public_path() . '/courses/', $filename);
+        }
+        $dom = new DOMDocument();
+        $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES', 'UTF-8'));
 
-            foreach ($images as $key => $img) {
-            $data = base64_decode(explode(',',explode(';',$img->getAttribute('src'))[1])[1]);
-            $image_name = "/courses/" . time(). $key.'.png';
-            file_put_contents(public_path().$image_name,$data);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img) {
+            $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+            $image_name = "/courses/" . time() . $key . '.png';
+            file_put_contents(public_path() . $image_name, $data);
 
             $img->removeAttribute('src');
-            $img->setAttribute('src',$image_name);
-            }
-            $content = $dom->saveHTML();
-
-            Course::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'imageName' => $imageName,
-            'content' => $content
-            ]);
+            $img->setAttribute('src', $image_name);
+        }
+        $content = $dom->saveHTML();
+        $request->merge([
+            'content' => $content,
+        ]);
+        Course::create($request->all());
         return redirect()->route('course.index')
             ->with('success', 'สร้างหลักสูตรสำเร็จแล้ว');
     }
@@ -118,14 +123,27 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-                        $request->validate([
-                        'title' => 'required',
-                        'description' => 'required',
-                        'content' => 'required',
-                        ]);
-                         $content = $request->content;
-                $dom = new DOMDocument();
-                    $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES','UTF-8'));
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+        ]);
+        $content = $request->content;
+
+        $imageName = '';
+        if ($request->file('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('blogs'), $imageName);
+            $input['image_name'] = $imageName;
+            if ($blog->image_name) {
+                File::delete(public_path('blogs/' . $blog->image_name));
+            }
+        } else {
+            unset($input['image_name']);
+        }
+
+        $dom = new DOMDocument();
+        $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES', 'UTF-8'));
 
 
         $images = $dom->getElementsByTagName('img');
@@ -133,23 +151,23 @@ class CourseController extends Controller
         foreach ($images as $key => $img) {
 
             // Check if the image is a new one
-            if (strpos($img->getAttribute('src'),'data:image/') ===0) {
+            if (strpos($img->getAttribute('src'), 'data:image/') === 0) {
 
-                $data = base64_decode(explode(',',explode(';',$img->getAttribute('src'))[1])[1]);
-                $image_name = "/courses/" . time(). $key.'.png';
-                file_put_contents(public_path().$image_name,$data);
+                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+                $image_name = "/courses/" . time() . $key . '.png';
+                file_put_contents(public_path() . $image_name, $data);
 
                 $img->removeAttribute('src');
-                $img->setAttribute('src',$image_name);
+                $img->setAttribute('src', $image_name);
             }
-
         }
         $content = $dom->saveHTML();
-                   $course->update([
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'content' => $content
-                    ]);
+        $course->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'imageName' => $input,
+            'content' => $content
+        ]);
 
         return redirect()->route('course.index')
             ->with('success', 'แก้ไขหลักสูตรเรียบร้อยแล้ว');
@@ -163,21 +181,20 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        $dom= new DOMDocument();
-        $dom->loadHTML(mb_convert_encoding($course->content, 'HTML-ENTITIES','UTF-8'));
+        $dom = new DOMDocument();
+        $dom->loadHTML(mb_convert_encoding($course->content, 'HTML-ENTITIES', 'UTF-8'));
 
         $images = $dom->getElementsByTagName('img');
 
         foreach ($images as $key => $img) {
 
-        $src = $img->getAttribute('src');
-        $path = Str::of($src)->after('/');
+            $src = $img->getAttribute('src');
+            $path = Str::of($src)->after('/');
 
 
-        if (File::exists($path)) {
-        File::delete($path);
-
-        }
+            if (File::exists($path)) {
+                File::delete($path);
+            }
         }
 
         $course->delete();
@@ -202,15 +219,16 @@ class CourseController extends Controller
             $courses = Course::where('title', 'LIKE', "%$search%")
                 ->select('id', 'title')
                 ->get();
-        }else {
+        } else {
             $courses = Course::select("id", "title")
-            ->get();
+                ->get();
         }
 
         return response()->json($courses);
     }
 
-    public function enroll(Request $request, $id) {
+    public function enroll(Request $request, $id)
+    {
         $course = Course::where('id', $id)->first();
         $studentList = $request->input('studentList');
         // Need to check if the student already enrolled?
@@ -218,7 +236,8 @@ class CourseController extends Controller
         return view('admin.course.show', compact('course'));
     }
 
-    public function unenroll(Request $request, $id, $cid) {
+    public function unenroll(Request $request, $id, $cid)
+    {
         $course = Course::where('id', $cid)->first();
         $course->students()->detach($id);
         return view('admin.course.show', compact('course'));
