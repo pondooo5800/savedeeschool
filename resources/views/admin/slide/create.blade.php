@@ -43,6 +43,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
+                                <strong>รูปภาพ <span class="text-danger">(ควรมีขนาด 1296 × 450 px)</span> :</strong>
                                 <input type="file" name="image" accept="image/*" class="form-control">
                             </div>
                         </div>

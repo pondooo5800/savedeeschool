@@ -114,7 +114,7 @@ class SlidesController extends Controller
         $slide->update($input);
 
         return redirect()->route('slide.index')
-            ->with('success', 'แก้ไขหลักสูตรเรียบร้อยแล้ว');
+            ->with('success', 'แก้ไขรูปภาพเรียบร้อยแล้ว');
     }
 
     /**
@@ -129,6 +129,6 @@ class SlidesController extends Controller
         $slide->delete();
 
         return redirect()->route('slide.index')
-            ->with('success', 'ลบหลักสูตรเรียบร้อยแล้ว');
+            ->with('success', 'ลบรูปภาพเรียบร้อยแล้ว');
     }
 }

@@ -128,31 +128,27 @@ class CourseController extends Controller
             'description' => 'required',
             'content' => 'required',
         ]);
-        $content = $request->content;
-
+        $input = $request->all();
         $imageName = '';
         if ($request->file('image')) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('blogs'), $imageName);
+            $request->image->move(public_path('courses'), $imageName);
             $input['image_name'] = $imageName;
-            if ($blog->image_name) {
-                File::delete(public_path('blogs/' . $blog->image_name));
+            if ($course->imageName) {
+                File::delete(public_path('courses/' . $course->imageName));
             }
         } else {
             unset($input['image_name']);
+            $input['image_name'] = $course->imageName;
         }
-
+        $content = $request->content;
         $dom = new DOMDocument();
         $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES', 'UTF-8'));
 
 
         $images = $dom->getElementsByTagName('img');
-
         foreach ($images as $key => $img) {
-
-            // Check if the image is a new one
             if (strpos($img->getAttribute('src'), 'data:image/') === 0) {
-
                 $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
                 $image_name = "/courses/" . time() . $key . '.png';
                 file_put_contents(public_path() . $image_name, $data);
@@ -165,7 +161,7 @@ class CourseController extends Controller
         $course->update([
             'title' => $request->title,
             'description' => $request->description,
-            'imageName' => $input,
+            'imageName' => $input['image_name'],
             'content' => $content
         ]);
 
@@ -181,6 +177,8 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
+        File::delete(public_path('courses/' . $course->imageName));
+
         $dom = new DOMDocument();
         $dom->loadHTML(mb_convert_encoding($course->content, 'HTML-ENTITIES', 'UTF-8'));
 

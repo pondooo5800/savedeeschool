@@ -23,37 +23,32 @@ class FrontendController extends Controller
     {
         $slide = Slide::all();
         $cours = Course::all();
-
         return view('frontend.index')->with([
-        'slides' => $slide,
-        'courses' => $cours
+            'slides' => $slide,
+            'courses' => $cours
         ]);
     }
     public function about($id = null)
     {
-        if ($id != null)
-        {
+        if ($id != null) {
             return view('frontend.about_detail');
 
             // $quiz_id = $id;
             // $quiz = Quiz::find($quiz_id);
             // $quiz_title = $quiz->title;
             // return view('admin.question.create', compact('quiz_id', 'quiz_title'));
-        }
-        else
-        {
+        } else {
             return view('frontend.about');
-
         }
     }
     public function course_detail($id)
     {
-         $course = Course::find($id);
-         $coursAll = Course::all();
-         return view('frontend.course_detail')->with([
-         'course' => $course,
-         'coursAll' => $coursAll
-         ]);
+        $course = Course::find($id);
+        $coursAll = Course::all();
+        return view('frontend.course_detail')->with([
+            'course' => $course,
+            'coursAll' => $coursAll
+        ]);
     }
     public function contact()
     {

@@ -2,8 +2,7 @@
 @section('styles')
 <style>
     .custom-height {
-        height: 400px;
-        width: 100%;
+        height: 450px;
         object-fit: cover;
         }
 </style>
@@ -29,7 +28,7 @@
             <h3 class="text-primary" style="font-family: 'Kanit'">หลักสูตรที่เปิดสอน</h3>
         </div>
         <div class="row g-5 services-inner">
-            @foreach ($courses as $index => $course)
+            @forelse ($courses as $index => $course)
             <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".2s">
                 <div class="services-item bg-light">
                     <div class="p-4 text-center services-content">
@@ -42,7 +41,9 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+                <h5 class="text-danger text-center" style="font-family: 'Kanit'">ไม่พบข้อมูล</h5>
+            @endforelse
         </div>
     </div>
 </div>
