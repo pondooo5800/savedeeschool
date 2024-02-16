@@ -33,14 +33,14 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <a href="#" class="h3 text-secondary">Help Link</a>
+                {{-- <a href="#" class="h3 text-secondary">Help Link</a>
                 <div class="mt-4 d-flex flex-column help-link">
                     <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>หลักสูตรและค่าเรียน</a>
                     <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>การสมัครเรียน</a>
-                    {{-- <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Helps</a>
+                    <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Helps</a>
                     <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>FQAs</a>
-                    <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Contact</a> --}}
-                </div>
+                    <a href="" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Contact</a>
+                </div> --}}
             </div>
             <div class="col-lg-3 col-md-6">
                 <a href="#" class="h3 text-secondary">ติดต่อเรา</a>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Slide;
 use App\Models\Course;
 use App\Models\Blog;
+use App\Models\Video;
 
 
 class FrontendController extends Controller
@@ -25,10 +26,12 @@ class FrontendController extends Controller
         $slide = Slide::all();
         $cours = Course::all();
         $blog = Blog::all();
+        $video = Video::all();
         return view('frontend.index')->with([
             'slides' => $slide,
             'courses' => $cours,
-            'blogs' => $blog
+            'blogs' => $blog,
+            'videos' => $video,
         ]);
     }
     public function about($id = null)
@@ -55,7 +58,10 @@ class FrontendController extends Controller
     }
     public function video()
     {
-        return view('frontend.video');
+        $video = Video::all();
+        return view('frontend.video')->with([
+            'videos' => $video,
+        ]);
     }
     public function gallery()
     {

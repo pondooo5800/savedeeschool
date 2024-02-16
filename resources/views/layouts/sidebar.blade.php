@@ -74,47 +74,13 @@
                       <span class="sidebar-normal"> บทความ (รอบรู้เรื่องขับขี่) </span>
                     </a>
                   </li>
-
-                  <li class="nav-item ">
-                    <a class="nav-link" href="../examples/pages/login.html">
-                      <span class="sidebar-mini"> LP </span>
-                      <span class="sidebar-normal"> Login Page </span>
-                    </a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link" href="../examples/pages/register.html">
-                      <span class="sidebar-mini"> RP </span>
-                      <span class="sidebar-normal"> Register Page </span>
-                    </a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link" href="../examples/pages/lock.html">
-                      <span class="sidebar-mini"> LSP </span>
-                      <span class="sidebar-normal"> Lock Screen Page </span>
-                    </a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link" href="../examples/pages/user.html">
-                      <span class="sidebar-mini"> UP </span>
-                      <span class="sidebar-normal"> User Profile </span>
-                    </a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link" href="../examples/pages/error.html">
-                      <span class="sidebar-mini"> E </span>
-                      <span class="sidebar-normal"> Error Page </span>
+                  <li class="nav-item {{ Request::is('video/*') || Request::is('video') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('video') }}">
+                      <span class="sidebar-normal"> Video </span>
                     </a>
                   </li>
                 </ul>
               </div>
-
-            {{-- <li class="nav-item active-pro ">
-          <a class="nav-link" href="./upgrade.html">
-            <i class="material-icons">unarchive</i>
-            <p>Upgrade to PRO</p>
-          </a>
-        </li> --}}
         </ul>
-
     </div>
 </div>

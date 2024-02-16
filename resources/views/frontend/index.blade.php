@@ -90,55 +90,26 @@
         <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
             <h3 class="text-primary" style="font-family: 'Kanit'">Video</h3>
         </div>
-        <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay=".7s">
+        <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay=".6s">
+            @forelse ($videos as $index => $video)
             <div class="testimonial-item border p-4">
                 <div class="d-flex align-items-center">
                     <div class="">
                         <iframe width="380" height="279"
-                            src="https://www.youtube.com/embed/XUmj1wleLxg?si=LYzygl85ut4FibFs"
+                            src="{{ $video->link}}"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
-            <div class="testimonial-item border p-4">
-                <div class=" d-flex align-items-center">
-                    <div class="">
-                        <iframe width="380" height="279"
-                            src="https://www.youtube.com/embed/RkrDjn-wOyU?si=k_yVEuyzrx-jIscb"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item border p-4">
-                <div class=" d-flex align-items-center">
-                    <div class="">
-                        <iframe width="380" height="279"
-                            src="https://www.youtube.com/embed/dP4Ge0KZ1UU?si=K8_RVJI6gvVlT56f"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item border p-4">
-                <div class=" d-flex align-items-center">
-                    <div class="">
-                        <iframe width="380" height="279"
-                            src="https://www.youtube.com/embed/hw_UnC5hqZw?si=uNJGPR8RF-dskCPl"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
+            @empty
+            <h5 class="text-danger text-center" style="font-family: 'Kanit'">ไม่พบข้อมูล</h5>
+            @endforelse
         </div>
         <br>
-        <div class="text-center mx-auto wow fadeIn" data-wow-delay=".9s">
-            <a href="{{url('/video')}}">
+        <div class="text-center mx-auto wow fadeIn" data-wow-delay=".6s">
+            <a href="{{url('all-video')}}">
                 <h5 class="text-primary" style="font-family: 'Kanit'">ดูทั้งหมด</h5>
             </a>
         </div>
