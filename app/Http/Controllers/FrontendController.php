@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Slide;
 use App\Models\Course;
+use App\Models\Blog;
 
 
 class FrontendController extends Controller
@@ -23,25 +24,23 @@ class FrontendController extends Controller
     {
         $slide = Slide::all();
         $cours = Course::all();
+        $blog = Blog::all();
         return view('frontend.index')->with([
             'slides' => $slide,
-            'courses' => $cours
+            'courses' => $cours,
+            'blogs' => $blog
         ]);
     }
     public function about($id = null)
     {
-        if ($id != null) {
-            return view('frontend.about_detail');
-
-            // $quiz_id = $id;
-            // $quiz = Quiz::find($quiz_id);
-            // $quiz_title = $quiz->title;
-            // return view('admin.question.create', compact('quiz_id', 'quiz_title'));
+        if ($id !== null) {
+            $blog = Blog::find($id);
+            return view('frontend.about_detail')->with('blog', $blog);
         } else {
-            return view('frontend.about');
+            $blogs = Blog::all();
+            return view('frontend.about')->with('blogs', $blogs);
         }
-    }
-    public function course_detail($id)
+    }    public function course_detail($id)
     {
         $course = Course::find($id);
         $coursAll = Course::all();

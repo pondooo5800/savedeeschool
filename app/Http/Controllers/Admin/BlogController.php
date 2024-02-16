@@ -40,32 +40,39 @@ class BlogController extends Controller
             'title' => 'required',
             'description' => 'required',
             'image' => 'required',
+            'content' => 'required',
         ]);
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('blogs'), $imageName);
-            $dom = new DOMDocument();
-            $dom->loadHTML(mb_convert_encoding($request->description, 'HTML-ENTITIES','UTF-8'));
 
-            $images = $dom->getElementsByTagName('img');
 
-            foreach ($images as $key => $img) {
-            $data = base64_decode(explode(',',explode(';',$img->getAttribute('src'))[1])[1]);
-            $image_name = "/blogs/" . time(). $key.'.png';
-            file_put_contents(public_path().$image_name,$data);
-
-            $img->removeAttribute('src');
-            $img->setAttribute('src',$image_name);
-            }
-            $description = $dom->saveHTML();
-
-            Blog::create([
-            'title' => $request->title,
-            'description' => $description,
-            'imageName' => $imageName,
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = rand() . '.' . $file->getClientOriginalName();
+            $request->merge([
+                'imageName' => $filename
             ]);
 
+            $file->move(public_path() . '/blogs/', $filename);
+        }
+        $dom = new DOMDocument();
+        $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES', 'UTF-8'));
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img) {
+            $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+            $image_name = "/blogs/" . time() . $key . '.png';
+            file_put_contents(public_path() . $image_name, $data);
+
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
+        }
+        $content = $dom->saveHTML();
+        $request->merge([
+            'content' => $content,
+        ]);
+        Blog::create($request->all());
         return redirect()->route('blog.index')
-            ->with('success', 'สร้าง บทความ (รอบรู้เรื่องขับขี่');
+            ->with('success', 'สร้าง บทความ (รอบรู้เรื่องขับขี่) เรียบร้อย');
     }
 
     /**
@@ -102,23 +109,46 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'content' => 'required',
         ]);
         $input = $request->all();
         $imageName = '';
         if ($request->file('image')) {
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('blogs'), $imageName);
-        $input['image_name'] = $imageName;
-            if ($blog->image_name) {
-                File::delete(public_path('blogs/'.$blog->image_name));            }
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('blogs'), $imageName);
+            $input['image_name'] = $imageName;
+            if ($blog->imageName) {
+                File::delete(public_path('blogs/' . $blog->imageName));
+            }
         } else {
-        unset($input['image_name']);
+            unset($input['image_name']);
+            $input['image_name'] = $blog->imageName;
         }
-        $blog->update($input);
+        $content = $request->content;
+        $dom = new DOMDocument();
+        $dom->loadHTML(mb_convert_encoding($request->content, 'HTML-ENTITIES', 'UTF-8'));
 
-        $blog->update($request->all());
+
+        $images = $dom->getElementsByTagName('img');
+        foreach ($images as $key => $img) {
+            if (strpos($img->getAttribute('src'), 'data:image/') === 0) {
+                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+                $image_name = "/blogs/" . time() . $key . '.png';
+                file_put_contents(public_path() . $image_name, $data);
+
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $image_name);
+            }
+        }
+        $content = $dom->saveHTML();
+        $blog->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'imageName' => $input['image_name'],
+            'content' => $content
+        ]);
         return redirect()->route('blog.index')
-            ->with('success', 'แก้ไขหลักสูตรเรียบร้อยแล้ว');
+            ->with('success', 'แก้ไข บทความ (รอบรู้เรื่องขับขี่) เรียบร้อย');
     }
 
     /**
@@ -129,10 +159,10 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        File::delete(public_path('blogs/'.$blog->image_name));
+        File::delete(public_path('blogs/' . $blog->imageName));
         $blog->delete();
 
         return redirect()->route('blog.index')
-            ->with('success', 'ลบหลักสูตรเรียบร้อยแล้ว');
+            ->with('success', 'ลบ บทความ (รอบรู้เรื่องขับขี่) เรียบร้อย');
     }
 }

@@ -32,7 +32,7 @@ use App\Http\Controllers\EmailController;
 // });
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/about', [FrontendController::class, 'about']);
-Route::get('about/{detail_id}', [FrontendController::class, 'about']);
+Route::get('about/{detail_id}', [FrontendController::class, 'about'])->name('blogs.detail');
 Route::get('course_detail/{course_detail}', [FrontendController::class, 'course_detail'])->name('courses.detail');
 Route::get('contact', [FrontendController::class, 'contact']);
 Route::get('video', [FrontendController::class, 'video']);
@@ -68,8 +68,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('settings', SettingsController::class);
     Route::resource('slide', SlidesController::class);
     Route::resource('blog', BlogController::class);
-
-
 });
 Route::get('/quiz_search_active', [QuestionController::class, 'quiz_search_active']);
 Route::get('/register', [StudentController::class, 'register_index'])->name('register_view');

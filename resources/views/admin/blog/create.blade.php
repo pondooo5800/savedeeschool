@@ -42,15 +42,21 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <strong>รายละเอียด (เบื้องต้น) : <span class="text-danger"> * </span></strong>
+                                                        <textarea class="form-control" name="description" placeholder="รายละเอียด (เบื้องต้น)">{{old('description')}}</textarea>
+                                                    </div>
+                                                </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>ภาพปก:</strong>
-                               <input type="file" name="image" accept="image/*" class="form-control">
+                                <strong>ภาพปก : <span class="text-danger"> * </span></strong>
+                                <input type="file" name="image" accept="image/*" class="form-control">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>รายละเอียด : <span class="text-danger"> * </span></strong>
-                                <textarea id="summernote" class="form-control" name="description"
+                                <textarea id="summernote" class="form-control" name="content"
                                     placeholder="รายละเอียด">{{old('description')}}</textarea>
                             </div>
                         </div>
