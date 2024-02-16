@@ -6,7 +6,7 @@
 <!-- Page Header Start -->
 <div class="container-fluid page-header py-5">
     <div class="container text-center py-5">
-        <h3 class="display-2 text-primary mb-4 animated slideInDown" style="font-family: 'Kanit'"></h3>
+        <h3 class="display-2 text-primary mb-4 animated slideInDown" style="font-family: 'Kanit'">รอบรู้เรื่องขับขี่</h3>
         <nav aria-label="breadcrumb animated slideInDown">
             <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">หน้าหลัก</a></li>
