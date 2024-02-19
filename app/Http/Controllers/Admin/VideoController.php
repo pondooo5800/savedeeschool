@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\Gallery;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -13,6 +14,11 @@ class VideoController extends Controller
 {
 
 
+    public function index_gallery()
+    {
+        $gallerys = Gallery::all();
+        return view('admin.gallery.index', compact('gallerys'));
+    }
     public function index()
     {
         $videos = Video::all();
@@ -73,5 +79,38 @@ class VideoController extends Controller
 
         return redirect()->back()->with('success', 'ลบ Video เรียบร้อย');
 
+    }
+    public function deleteImage(Request $request)
+    {
+        $g_id = $request->input('id');
+        $gallerys = Gallery::find($g_id);
+
+        $gallerys->delete();
+
+        return redirect()->back()->with('success', 'ลบ รูปภาพเรียบร้อย');
+
+    }
+    public function fileStore(Request $request)
+    {
+        if ($request->hasFile('file')) {
+
+            $uploadPath = "gallerys/";
+
+            $file = $request->file('file');
+
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '-' . rand(0, 99) . '.' . $extention;
+            $file->move($uploadPath, $filename);
+
+            $finalImageName = $uploadPath . $filename;
+
+            Gallery::create([
+                'image' => $finalImageName
+            ]);
+
+            return response()->json(['success' => 'อัปโหลดรูปภาพสำเร็จ']);
+        } else {
+            return response()->json(['error' => 'การอัปโหลดไฟล์ล้มเหลว']);
+        }
     }
 }

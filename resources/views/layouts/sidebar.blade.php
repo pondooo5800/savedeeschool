@@ -79,6 +79,16 @@
                       <span class="sidebar-normal"> Video </span>
                     </a>
                   </li>
+                  <li class="nav-item {{ Request::is('gallery/*') || Request::is('gallery') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('gallery') }}">
+                      <span class="sidebar-normal"> Gallery </span>
+                    </a>
+                  </li>
+                  <li class="nav-item {{ Request::is('license/*') || Request::is('license') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('license') }}">
+                      <span class="sidebar-normal"> ทำใบขับขี่ใหม่ </span>
+                    </a>
+                  </li>
                 </ul>
               </div>
         </ul>

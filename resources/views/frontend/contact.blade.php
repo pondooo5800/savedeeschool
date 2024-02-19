@@ -109,40 +109,29 @@
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay=".5s">
-                    <div class="p-5 rounded contact-form">
-                        <h4 class="text-primary">สมัครเรียน</h4>
-                        <div class="mb-4">
-                            <input type="text" class="form-control border-0 py-3" placeholder="ชื่อ-สกุล">
-                        </div>
-                        <div class="mb-4">
-                            <input type="email" class="form-control border-0 py-3" placeholder="เลขที่บัตรประชาชน">
-                        </div>
-                        <div class="mb-4">
-                            <input type="text" class="form-control border-0 py-3" placeholder="เบอร์โทร">
-                        </div>
-                        <div class="mb-4">
-                            <input type="text" class="form-control border-0 py-3" placeholder="ไอดีไลน์">
-                        </div>
-                        <div class="mb-4">
-                            <input type="text" class="form-control border-0 py-3" placeholder="email">
-                        </div>
-                        <div class="mb-4">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>หลักสูตร</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                        </div>
-                        <div class="mb-4">
-                            <textarea class="w-100 form-control border-0 py-3" rows="6" cols="10"
-                                placeholder="ข้อความ"></textarea>
-                        </div>
-                        <div class="text-start">
-                            <button class="btn bg-primary text-white py-3 px-5" type="button">ส่งข้อความ</button>
-                        </div>
+<div class="p-5 rounded contact-form">
+                    <h5 class="text-primary">สมัครเรียน</h5>
+                    <div class="mb-4">
+                        <input type="text" class="form-control border-0 py-2" placeholder="ชื่อ-สกุล">
                     </div>
-                </div>
+                    <div class="mb-4">
+                        <input type="text" class="form-control border-0 py-2" placeholder="เบอร์โทร">
+                    </div>
+                    <div class="mb-4">
+                        <input type="text" class="form-control border-0 py-2" placeholder="Line ID">
+                    </div>
+                    <div class="mb-4">
+                        <select class="form-select border-0 py-2" aria-label="Default select example" name="course_id">
+                            <option selected>หลักสูตร</option>
+                            @foreach($coursAll as $course)
+                            <option value="{{ $course->id }}">{{ $course->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn bg-primary text-white" type="button">สมัครเรียน</button>
+                    </div>
+                </div>                </div>
             </div>
         </div>
     </div>

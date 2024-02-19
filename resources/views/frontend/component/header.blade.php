@@ -35,10 +35,10 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ (request()->is('video*')) || (request()->is('gallery*')) ? 'active text-secondary' : '' }} " data-bs-toggle="dropdown">อื่นๆ</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ (request()->is('all-video*')) || (request()->is('all-gallery*')) ? 'active text-secondary' : '' }} " data-bs-toggle="dropdown">อื่นๆ</a>
                         <div class="dropdown-menu rounded">
-                            <a href="{{ url('gallery')}}" class="dropdown-item">Gallery</a>
-                            <a href="{{ url('video') }}" class="dropdown-item">Video</a>
+                            <a href="{{ url('all-gallery')}}" class="dropdown-item">Gallery</a>
+                            <a href="{{ url('all-video') }}" class="dropdown-item">Video</a>
                         </div>
                     </div>
                     <a href="{{ url('register') }}" class="nav-item nav-link">ฝึกทำข้อสอบ</a>

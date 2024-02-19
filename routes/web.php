@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\SlidesController;
 use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\Admin\LicenseController;
 use App\Http\Controllers\EmailController;
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Route::get('about/{detail_id}', [FrontendController::class, 'about'])->name('blo
 Route::get('course_detail/{course_detail}', [FrontendController::class, 'course_detail'])->name('courses.detail');
 Route::get('contact', [FrontendController::class, 'contact']);
 Route::get('all-video', [FrontendController::class, 'video']);
-Route::get('gallery', [FrontendController::class, 'gallery']);
+Route::get('all-gallery', [FrontendController::class, 'gallery']);
 Route::get('new-license', [FrontendController::class, 'new_license']);
 Route::get('renew-license', [FrontendController::class, 'renew_license']);
 Route::get('internationa-license', [FrontendController::class, 'internationa_license']);
@@ -74,8 +75,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('edit-video/{id}', [VideoController::class, 'edit']);
     Route::put('video-update', [VideoController::class, 'update']);
     Route::delete('del-video', [VideoController::class, 'destroy']);
+    Route::resource('license', LicenseController::class);
 
 
+    Route::get('gallery', [VideoController::class, 'index_gallery']);
+    Route::post('gallery-update', [VideoController::class, 'fileStore']);
+    Route::delete('gallery-delete', [VideoController::class, 'deleteImage']);
 });
 Route::get('/quiz_search_active', [QuestionController::class, 'quiz_search_active']);
 Route::get('/register', [StudentController::class, 'register_index'])->name('register_view');

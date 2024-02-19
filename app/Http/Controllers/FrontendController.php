@@ -7,6 +7,7 @@ use App\Models\Slide;
 use App\Models\Course;
 use App\Models\Blog;
 use App\Models\Video;
+use App\Models\Gallery;
 
 
 class FrontendController extends Controller
@@ -54,7 +55,9 @@ class FrontendController extends Controller
     }
     public function contact()
     {
-        return view('frontend.contact');
+        $coursAll = Course::all();
+
+        return view('frontend.contact')->with('coursAll', $coursAll);
     }
     public function video()
     {
@@ -65,7 +68,8 @@ class FrontendController extends Controller
     }
     public function gallery()
     {
-        return view('frontend.gallery');
+        $gallerys = Gallery::all();
+        return view('frontend.gallery', compact('gallerys'));
     }
     public function new_license()
     {
