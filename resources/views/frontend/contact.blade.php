@@ -19,8 +19,15 @@
     <div class="container py-5">
         <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
             <h1 class="mb-3">สมัครเรียนได้ที่</h1>
-            <p class="mb-2"><a target="_blank" href="https://page.line.me/yoz5198g?openQrModal=true">โรงเรียนสอนขับรถ เซฟดี ไดรฟ์เวอร์ </a></p>
-            <p class="mb-2"><a target="_blank" href="https://page.line.me/yoz5198g?openQrModal=true">Savedee Driver School </a></p>
+            <p class="mb-2"><a target="_blank" href="https://page.line.me/yoz5198g?openQrModal=true">โรงเรียนสอนขับรถ
+                    เซฟดี ไดรฟ์เวอร์ </a></p>
+            <p class="mb-2"><a target="_blank" href="https://page.line.me/yoz5198g?openQrModal=true">Savedee Driver
+                    School </a></p>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                        @endif
         </div>
         <div class="contact-detail position-relative p-5">
             <div class="row g-5 mb-5 justify-content-center">
@@ -32,11 +39,11 @@
                         </div>
                         <div class="ms-3">
                             <h6 class="text-primary">สำนักงานใหญ่</h6>
-                             166/7 ถ.มหาจักรพรรดิ ต.หน้าเมือง อ.เมือง จ.ฉะเชิงเทรา 24000 (ก่อนถึงสถานีรถไฟ ฉะเชิงเทรา)
-                             <br><br>
+                            166/7 ถ.มหาจักรพรรดิ ต.หน้าเมือง อ.เมือง จ.ฉะเชิงเทรา 24000 (ก่อนถึงสถานีรถไฟ ฉะเชิงเทรา)
+                            <br><br>
                             <h6 class="text-primary">สนามฝึกหัดขับรถ</h6>
                             166/7 ถ.มหาจักรพรรดิ ต.หน้าเมือง อ.เมือง จ.ฉะเชิงเทรา 24000 (ก่อนถึงสถานีรถไฟ ฉะเชิงเทรา)
-                             <br><br>
+                            <br><br>
                             <h6 class="text-primary">เลขที่ประจำตัวผู้เสียภาษี</h6>
                             0-2455-59001-69-2
                         </div>
@@ -72,7 +79,8 @@
                         </div>
                         <div class="ms-3">
                             <h4 class="text-primary">Email Us</h4>
-                            <a class="h5" href="mailto:savedee.driver@hotmail.com" target="_blank">savedee.driver@hotmail.com</a>
+                            <a class="h5" href="mailto:savedee.driver@hotmail.com"
+                                target="_blank">savedee.driver@hotmail.com</a>
                         </div>
                     </div>
                     <div class="d-flex bg-light p-3 rounded">
@@ -81,11 +89,13 @@
                             <i class="fab fa-facebook text-white"></i>
                         </div>
                         <div class="ms-3">
-                            <a class="h5" href="https://www.facebook.com/savedeeschool/" target="_blank">Savedee School</a>
+                            <a class="h5" href="https://www.facebook.com/savedeeschool/" target="_blank">Savedee
+                                School</a>
                             <br>
                             <a class="h5" href="https://www.facebook.com/Savedeecafe/" target="_blank">Savedee Cafe</a>
                             <br>
-                            <a class="h5" href="https://www.facebook.com/savedeebrokers/" target="_blank">Savedee Brokers</a>
+                            <a class="h5" href="https://www.facebook.com/savedeebrokers/" target="_blank">Savedee
+                                Brokers</a>
                         </div>
                     </div>
                     <div class="d-flex bg-light p-3 rounded">
@@ -94,7 +104,8 @@
                             <i class="fab fa-line text-white"></i>
                         </div>
                         <div class="ms-3 justify-content-center align-self-center">
-                            <a class="h5 " href="https://page.line.me/yoz5198g?openQrModal=true" target="_blank">@Savedee</a>
+                            <a class="h5 " href="https://page.line.me/yoz5198g?openQrModal=true"
+                                target="_blank">@Savedee</a>
                         </div>
                     </div>
                 </div>
@@ -109,29 +120,34 @@
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay=".5s">
-<div class="p-5 rounded contact-form">
-                    <h5 class="text-primary">สมัครเรียน</h5>
-                    <div class="mb-4">
-                        <input type="text" class="form-control border-0 py-2" placeholder="ชื่อ-สกุล">
+                    <div class="p-5 rounded contact-form">
+<form action="{{ url('send-line-notification') }}" method="POST" enctype="multipart/form-data"
+                class="p-5 rounded contact-form">
+                @csrf
+                <h5 class="text-primary">สมัครเรียน</h5>
+                <div class="mb-4">
+                    <input type="text" required name="name" class="form-control border-0 py-2" placeholder="ชื่อ-สกุล">
+                </div>
+                <div class="mb-4">
+                    <input type="text" required name="phone" class="form-control border-0 py-2" placeholder="เบอร์โทร">
+                </div>
+                <div class="mb-4">
+                    <input type="text" required name="line" class="form-control border-0 py-2" placeholder="Line ID">
+                </div>
+                <div class="mb-4">
+                    <select required class="form-select border-0 py-2" aria-label="Default select example" name="course">
+                        <option disabled selected value="">เลือกหลักสูตร</option>
+                        @foreach($coursAll as $course)
+                        <option value="{{ $course->title }}">{{ $course->title }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button class="btn bg-primary text-white" type="submit">สมัครเรียน</button>
+                </div>
+            </form>
                     </div>
-                    <div class="mb-4">
-                        <input type="text" class="form-control border-0 py-2" placeholder="เบอร์โทร">
-                    </div>
-                    <div class="mb-4">
-                        <input type="text" class="form-control border-0 py-2" placeholder="Line ID">
-                    </div>
-                    <div class="mb-4">
-                        <select class="form-select border-0 py-2" aria-label="Default select example" name="course_id">
-                            <option selected>หลักสูตร</option>
-                            @foreach($coursAll as $course)
-                            <option value="{{ $course->id }}">{{ $course->title }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn bg-primary text-white" type="button">สมัครเรียน</button>
-                    </div>
-                </div>                </div>
+                </div>
             </div>
         </div>
     </div>

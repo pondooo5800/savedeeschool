@@ -152,7 +152,7 @@ Add Quiz | {{ config('settings.name', 'Laravel') }}
                                 <div class="row">
                                     <div class="col-xs-4 col-sm-4 col-md-4">
                                         <input type="number" name="duration" class="form-control"
-                                            placeholder="Duration of the quiz. Set 0 to disable."
+                                            placeholder="เวลา"
                                             value="{{old('duration')}}">
                                     </div>
                                     <div class="col-xs-2 col-sm-2 col-md-2">
@@ -217,6 +217,9 @@ Add Quiz | {{ config('settings.name', 'Laravel') }}
 
 @section('scripts')
 <script>
+    $(document).ready(function() {
+    $('#status').select2();
+    });
 $('#course_search').select2({
     placeholder: '-- เลือกหลักสูตร --',
     ajax: {

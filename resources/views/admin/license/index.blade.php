@@ -36,13 +36,13 @@
         <div class="card">
             <div class="card-header">
                 <div class="pull-left">
-                    <h2 class="card-title"><i class="material-icons">settings</i> ทำใบขับขี่</h2>
+                    <h2 class="card-title"><i class="material-icons">settings</i> การทำใบขับขี่และเตรียมทำข้อสอบ</h2>
                 </div>
-                <div class="pull-right">
+                {{-- <div class="pull-right">
                     <a class="btn btn-darken" href="{{ route('license.create') }}" title="เพิ่ม ทำใบขับขี่"> <i
                             class="material-icons">add</i> เพิ่ม ทำใบขับขี่
                     </a>
-                </div>
+                </div> --}}
             </div>
             <div class="card-body">
                 @if ($message = Session::get('success'))
@@ -87,10 +87,10 @@
                                         <i class="material-icons">edit</i>
                                     </a>
 
-                                    <a class="deletebtn btn-icon btn-darken"
+                                    {{-- <a class="deletebtn btn-icon btn-darken"
                                         data-action="{{ route('license.destroy', $row->id) }}" href="#" title="Delete">
                                         <i class="material-icons">delete</i>
-                                    </a>
+                                    </a> --}}
                                 </td>
                             </tr>
                             @endforeach

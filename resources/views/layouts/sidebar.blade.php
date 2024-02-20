@@ -86,7 +86,7 @@
                   </li>
                   <li class="nav-item {{ Request::is('license/*') || Request::is('license') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('license') }}">
-                      <span class="sidebar-normal"> ทำใบขับขี่ใหม่ </span>
+                      <span class="sidebar-normal"> การทำใบขับขี่และเตรียมทำข้อสอบ </span>
                     </a>
                   </li>
                 </ul>

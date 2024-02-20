@@ -44,6 +44,7 @@ Route::get('renew-license', [FrontendController::class, 'renew_license']);
 Route::get('internationa-license', [FrontendController::class, 'internationa_license']);
 Route::get('theory', [FrontendController::class, 'theory']);
 Route::get('practical', [FrontendController::class, 'practical']);
+Route::post('send-line-notification', [FrontendController::class, 'sendNotification']);
 
 Auth::routes();
 

@@ -42,11 +42,13 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->input());
         $request->validate([
             'title' => 'required',
             'number_qns' => 'required',
             'course_id' => 'required',
             'status' => 'required',
+            'duration' => 'required',
             'access_code' => 'required',
         ]);
 
