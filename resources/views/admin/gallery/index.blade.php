@@ -105,7 +105,7 @@
                     @foreach ($gallerys ?? '' as $row)
                    <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="card border shadow p-2 d-flex flex-column align-items-center" style="height: 250px;">
-                        <img src="{{ asset($row->image) }}" class="img-fluid" style="object-fit: cover; max-width: 100%; height: 100%;"
+                        <img src="{{ asset($row->image) }}" class="img-fluid" style="object-fit: contain; max-width: 100%; height: 100%;"
                             alt="Img">
                             <br>
                         <a href="#" type="button" data-id="{{$row->id}}" class="deletebtn text-danger">ลบ</a>

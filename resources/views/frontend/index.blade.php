@@ -86,7 +86,7 @@
 </div>
 <div class="container-fluid testimonial py-0 mb-5">
     <div class="container">
-        <div class="text-center mx-auto wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+        <div class="text-center mx-auto wow fadeIn" data-wow-delay=".2s" style="max-width: 600px;">
             <h3 class="text-primary" style="font-family: 'Kanit'">Video</h3>
         </div>
         <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay=".6s">

@@ -46,9 +46,13 @@ class VideoController extends Controller
         $request->validate([
             'link' => 'required'
         ]);
+        $videoURL = $request->input('link');
+        $convertedURL = str_replace("watch?v=", "embed/", $videoURL);
 
+        $video = new Video;
+        $video->link = $convertedURL;
+        $video->save();
 
-        Video::create($request->all());
         return redirect()->back()->with('success', 'สร้าง Video เรียบร้อย');
     }
 
@@ -64,7 +68,9 @@ class VideoController extends Controller
     {
         $v_id = $request->input('id');
         $videos = Video::find($v_id);
-        $videos->link = $request->input('link');
+        $videoURL = $request->input('link');
+        $convertedURL = str_replace("watch?v=", "embed/", $videoURL);
+        $videos->link = $convertedURL;
         $videos->update();
         return redirect()->back()->with('success', 'แก้ไข Video เรียบร้อย');
     }
@@ -78,7 +84,6 @@ class VideoController extends Controller
         $videos->delete();
 
         return redirect()->back()->with('success', 'ลบ Video เรียบร้อย');
-
     }
     public function deleteImage(Request $request)
     {
@@ -88,7 +93,6 @@ class VideoController extends Controller
         $gallerys->delete();
 
         return redirect()->back()->with('success', 'ลบ รูปภาพเรียบร้อย');
-
     }
     public function fileStore(Request $request)
     {
@@ -113,4 +117,28 @@ class VideoController extends Controller
             return response()->json(['error' => 'การอัปโหลดไฟล์ล้มเหลว']);
         }
     }
+    // public function fileStore(Request $request) in production
+    // {
+
+    //     if ($request->hasFile('file')) {
+
+    //         $uploadPath = "gallerys/";
+
+    //         $file = $request->file('file');
+
+    //         $extention = $file->getClientOriginalExtension();
+    //         $filename = time() . '-' . rand(0, 99) . '.' . $extention;
+    //         $file->move(public_path() . $uploadPath, $filename);
+
+    //         $finalImageName = $uploadPath . $filename;
+
+    //         Gallery::create([
+    //             'image' => $finalImageName
+    //         ]);
+
+    //         return response()->json(['success' => 'อัปโหลดรูปภาพสำเร็จ']);
+    //     } else {
+    //         return response()->json(['error' => 'การอัปโหลดไฟล์ล้มเหลว']);
+    //     }
+    // }
 }
