@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-
 <div class="container my-3">
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -23,27 +22,27 @@
     </div>
 </div>
 
-<div class="container-fluid services py-5">
+<div class="container-fluid services py-3">
     <div class="container">
-        <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+        <div class="text-center mx-auto pb-3 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
             <h3 class="text-primary" style="font-family: 'Kanit'">หลักสูตรที่เปิดสอน</h3>
         </div>
         <div class="row g-5 services-inner">
             @forelse ($courses as $index => $course)
-            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".2s">
-                <div class="services-item bg-light">
-                    <div class="p-4 text-center services-content">
-                        <div class="services-content-icon">
-                            <img src="{{ asset('courses/'.$course->imageName) }}" class="img-fluid" alt="First slide">
-                            <h4 class="m-3 font-text">{{$course->title}}</h4>
-                            <p class="mb-4 text-start">{{ \Illuminate\Support\Str::limit($course->description, 150) }}
-                            </p>
-                            <a href="{{ route('courses.detail', $course->id) }}"
-                                class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
-                        </div>
+           <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".2s">
+            <div class="services-item bg-light">
+                <div class="p-4 text-center services-content">
+                    <div class="services-content-icon">
+                        <img src="{{ asset('courses/'.$course->imageName) }}" class="img-fluid img-responsive" alt="First slide"
+                            width="352" height="268">
+                        <h4 class="m-3 font-text">{{$course->title}}</h4>
+                        <p class="mb-4 text-start">{{ \Illuminate\Support\Str::limit($course->description, 150) }}</p>
+                        <a href="{{ route('courses.detail', $course->id) }}"
+                            class="btn btn-secondary text-white px-5 py-3 rounded-pill">รายละเอียด</a>
                     </div>
                 </div>
             </div>
+        </div>
             @empty
             <h5 class="text-danger text-center" style="font-family: 'Kanit'">ไม่พบข้อมูล</h5>
             @endforelse
@@ -51,7 +50,7 @@
     </div>
 </div>
 
-<div class="container-fluid blog py-5 mb-3">
+<div class="container-fluid blog py-3">
     <div class="container">
         <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
             <h3 class="text-primary" style="font-family: 'Kanit'">รอบรู้เรื่องขับขี่</h3>
@@ -87,7 +86,7 @@
 </div>
 <div class="container-fluid testimonial py-0 mb-5">
     <div class="container">
-        <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+        <div class="text-center mx-auto wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
             <h3 class="text-primary" style="font-family: 'Kanit'">Video</h3>
         </div>
         <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay=".6s">

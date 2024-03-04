@@ -17,14 +17,9 @@
 </div>
 <!-- Page Header End -->
 <!-- Blog Start -->
-<div class="container-fluid blog py-5">
-    <div class="container py-5">
-        <div class="container-fluid">
-            <div class="container ">
-               {!! $licenses->content !!}
-            </div>
-        </div>
-
+<div class="container-fluid blog py-3">
+    <div class="container">
+{!! $licenses->content !!}
     </div>
 </div>
 

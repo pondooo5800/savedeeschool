@@ -17,21 +17,19 @@
         </nav>
     </div>
 </div>
-
-<div class="container py-5">
-    <div class="row g-5">
+<div class="container py-4">
+    <div class="row">
         <div class="col-lg-12">
             <article class="blog-details">
-                <div class="post-img mb-5 text-center">
+                <div class="post-img mb-3 text-center">
                     <img src="{{ asset('blogs/'.$blog->imageName) }}" alt="" class="img-fluid">
                 </div>
                 <h2 class="title">{{ $blog->title }}</h2>
                 <div class="content">
-                        {!! $blog->content !!}
+                    {!! $blog->content !!}
                 </div>
             </article>
         </div>
     </div>
-
 </div>
 @endsection

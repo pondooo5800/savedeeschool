@@ -127,12 +127,9 @@
 </div>
 
 
-<div class="container-fluid blog py-5 my-5">
-  <div class="container py-5">
-    <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-      <h3 class="text-primary" style="font-family: 'Kanit'">Gallery</h3>
-    </div>
-    <div class="row g-5 justify-content-center wow fadeIn" data-wow-delay=".3s">
+<div class="container-fluid blog py-3">
+  <div class="container">
+    <div class="row justify-content-center wow fadeIn" data-wow-delay=".3s">
       <div class="container">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 gallery-grid">
           @foreach ($gallerys ?? '' as $row)

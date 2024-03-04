@@ -15,11 +15,8 @@
         </nav>
     </div>
 </div>
-<div class="container-fluid blog py-5 my-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-            <h3 class="text-primary" style="font-family: 'Kanit'">รอบรู้เรื่องขับขี่</h3>
-        </div>
+<div class="container-fluid blog py-3">
+    <div class="container py-4">
         <div class="row g-5 justify-content-center">
             @forelse ($blogs as $index => $blog)
             <div class="col-lg-6 col-xl-4 wow fadeIn" data-wow-delay=".3s">

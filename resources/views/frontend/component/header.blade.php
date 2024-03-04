@@ -6,14 +6,14 @@
 <!-- Spinner End -->
 
 <!-- Navbar Start -->
-<div class="container-fluid bg-white">
+<div class="container-fluid" style="background-color: #154885">
     <div class="container">
         <nav class="navbar navbar-dark navbar-expand-lg py-0">
             <a href="{{ url('/') }}" class="navbar-brand">
-                    <img class="img-fluid" style="max-width: 100%; height: 100px;" src="{{asset('assets/frontend/logo/logo.png')}}">
+                    <img class="img-fluid" style="max-width: 100%; height: 100px;" src="{{asset('assets/frontend/logo/logo.jpg')}}">
             </a>
             <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse" style="background-color:#154885 ">
+                data-bs-target="#navbarCollapse" style="background-color:#ffc107 ">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
@@ -48,16 +48,16 @@
             <div class="d-none d-xl-flex flex-shirink-0">
                 <div id="phone-tada" class="d-flex align-items-center justify-content-center me-4">
                     <a href="tel:038511948" class="position-relative animated tada infinite">
-                        <i class="fa fa-phone-alt text-primary fa-2x"></i>
+                        <i class="fa fa-phone-alt text-warning fa-2x"></i>
                         <div class="position-absolute" style="top: -7px; left: 20px;">
-                            <span><i class="fa fa-comment-dots text-primary"></i></span>
+                            <span><i class="fa fa-comment-dots text-warning"></i></span>
                         </div>
                     </a>
                 </div>
                 <div class="d-flex flex-column pe-4 border-primary border-end">
-                    <span class="text-secondary-50">สอบถามเพิ่มเติม ?</span>
+                    <span class="text-white">สอบถามเพิ่มเติม ?</span>
                     <a href="tel:038511948">
-                        <span class="text-primary">โทร: 038-511948-9</span>
+                        <span class="text-white">โทร: 038-511948-9</span>
                     </a>
 
                 </div>

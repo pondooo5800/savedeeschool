@@ -5,13 +5,13 @@
     visibility: hidden;
     transition: opacity .8s ease-out, visibility 0s linear .5s;
     z-index: 99999;
- }
+}
 
- #spinner.show {
-     transition: opacity .8s ease-out, visibility 0s linear .0s;
-     visibility: visible;
-     opacity: 1;
- }
+#spinner.show {
+    transition: opacity .8s ease-out, visibility 0s linear .0s;
+    visibility: visible;
+    opacity: 1;
+}
 
 /*** Spinner End ***/
 
@@ -94,8 +94,13 @@
 }
 
 @keyframes mymove {
-    from {left: -100%;}
-    to {left: 100%;}
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 100%;
+    }
 }
 
 /*** Topbar End ***/
@@ -108,7 +113,7 @@
 
 .navbar .navbar-nav .nav-link {
     padding: 10px;
-    color: var(--bs-dark);
+    color: var(--bs-white);
     font-size: 18px;
     outline: none;
 
@@ -116,13 +121,13 @@
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
-    color: var(--bs-primary) !important;
+    color: var(--bs-secondary) !important;
 }
 
 .navbar .dropdown-toggle::after {
     border: none;
     content: "\f107";
-    font-family: "Font Awesome 5 Free",sans-serif;
+    font-family: "Font Awesome 5 Free", sans-serif;
     font-weight: 900;
     vertical-align: middle;
     margin-left: 8px;
@@ -369,6 +374,7 @@
 .services-item:hover .services-content-icon p {
     color: var(--bs-white);
 }
+
 .services-item:hover .services-content-icon h4 {
     color: var(--bs-white);
 }
@@ -468,10 +474,12 @@
     top: 6px;
     padding-bottom: 5px;
 }
+
 .blog-icon-1 {
     position: relative;
     top: -4px;
 }
+
 .blog-btn-icon:hover .blog-icon-1 {
     top: 0;
     right: -140px;
