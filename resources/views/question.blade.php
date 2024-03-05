@@ -43,6 +43,7 @@
                                     @php
                                     echo nl2br($qns->question);
                                     @endphp
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="responsiveVoice.speak($('#text').val(),$('#voiceselection').val());"><span><i class="fa fa-volume-up"></i></span></button>
                                 </div>
 
                                 <table class="question-answers">
@@ -124,12 +125,16 @@
                                             echo '</tr>';
                                         }
                                         } else {
-                                        foreach ($qns->get_options_list() as $q) {
+                                        foreach ($qns->get_options_list()  as $key => $q) {
                                         echo '<tr class="answer-option">';
-                                            echo '<td class="answer-correct"><input type="radio" name="qns_ans" value="' .
-                                                                    $q->name .
-                                                                    '"></td>';
-                                            echo '<td>' . $q->name . '</td>';
+                                            echo '<td class="answer-correct">';
+                                                echo '<input type="hidden" id="text-answer_'.$key.'" value="' . $q->name . '">';
+                                                echo '<input type="radio" name="qns_ans" value="' . $q->name . '">';
+                                                echo '</td>';
+                                            echo '<td><span class="px-2">' . $q->name . '</span><button type="button" class="btn btn-primary btn-sm"
+                                                    onclick="responsiveVoice.speak($(\'#text-answer_'.$key.'\').val(), $(\'#voiceselection\').val());">';
+                                                    echo '<span><i class="fa fa-volume-up"></i></span></button>';
+                                                echo '</td>';
                                             echo '</tr>';
                                         }
                                         }
@@ -143,39 +148,43 @@
                             <div class="col-md-4">
                                 @foreach ($user_quiz->getQuestionList() as $item)
                                 <a href="{!! route('question_link_number', ['course_id' => $qns->quiz->course_id, 'quiz_id' => $qns->quiz_id, 'qns_id' => $item['qns_id']]) !!}"
-                                    class="btn {{ ($item['qns_review'] == 1) ? 'btn-warning' : (!empty($item['ans_text']) ? 'btn-success' : '') }}">{{ $loop->index + 1 }}</a>
+                                    class="btn {{ ($item['qns_review'] == 1) ? 'btn-warning' : (!empty($item['ans_text']) ? 'btn-success' : '') }}">{{
+                                    $loop->index + 1 }}</a>
                                 @endforeach
                             </div>
                             @endif
                         </div>
                         <br />
-                       <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <input type="hidden" name="question_type" value="{{ $qns->question_type }}">
-                            <input type="hidden" name="question_id" value="{{ $qns->id }}">
-                            <input type="hidden" name="quiz_id" value="{{ $qns->quiz_id }}">
-                            <input type="hidden" name="course_id" value="{{ $qns->quiz->course_id }}">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <input type="hidden" id="text" value="{{$qns->question}}">
+                                <select style="display: none" id="voiceselection"></select>
+                                <input type="hidden" name="question_type" value="{{ $qns->question_type }}">
+                                <input type="hidden" name="question_id" value="{{ $qns->id }}">
+                                <input type="hidden" name="quiz_id" value="{{ $qns->quiz_id }}">
+                                <input type="hidden" name="course_id" value="{{ $qns->quiz->course_id }}">
 
-                            <button type="submit" class="btn btn-primary" name="action" value="prev">ก่อนหน้า</button>
-                            <button type="submit" class="btn btn-primary" name="action" value="next">ถัดไป</button>
+                                <button type="submit" class="btn btn-primary" name="action"
+                                    value="prev">ก่อนหน้า</button>
+                                <button type="submit" class="btn btn-primary" name="action" value="next">ถัดไป</button>
 
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" {{ $qns_review==1 ? 'checked=checked' : '' }}
-                                        name="qns_review">
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                </label>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" {{ $qns_review==1
+                                            ? 'checked=checked' : '' }} name="qns_review">
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                ทำเครื่องหมายเพื่อตรวจสอบ
                             </div>
-                            ทำเครื่องหมายเพื่อตรวจสอบ
-                        </div>
 
-                        <div class="col-md-6 col-sm-12 text-md-right">
-                            <button type="submit" id="complete-quiz" class="btn btn-primary" name="action"
-                                value="complete-quiz">สิ้นสุดการทำข้อสอบ</button>
+                            <div class="col-md-6 col-sm-12 text-md-right">
+                                <button type="submit" id="complete-quiz" class="btn btn-primary" name="action"
+                                    value="complete-quiz">สิ้นสุดการทำข้อสอบ</button>
+                            </div>
                         </div>
-                    </div>
                     </form>
                 </div>
             </div>
@@ -187,7 +196,15 @@
 
 @section('scripts')
 <script>
-$(document).bind("contextmenu", function(e) {
+    var voicelist = responsiveVoice.getVoices();
+        var vselect = $("#voiceselection");
+        var vthaimale = 'Thai Male';
+        $.each(voicelist, function() {
+                vselect.append($("<option />").val(vthaimale).text(this.name));
+        });
+</script>
+<script>
+    $(document).bind("contextmenu", function(e) {
     return false;
 });
 
@@ -224,7 +241,11 @@ function timer() {
         '0' + seconds).slice(-2)
 
     if (distance == 60) {
-        alert('Quiz ended in 1 minute');
+        Swal.fire({
+            title: "แจ้งเตือน",
+            text: "แบบทดสอบจบลงใน 1 นาที",
+            icon: "question"
+            });
     }
     // If the count down is over, write some text
     if (distance <= 0) {
