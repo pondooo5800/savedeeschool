@@ -3,7 +3,7 @@
                 class="material-icons">cast_for_education</i>
                 SAVEDEE
         </a></div>
-    <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper bg-white">
         <ul class="nav">
             <li class="nav-item {{ Request::is('dashboard/*') || Request::is('dashboard') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('dashboard') }}">
