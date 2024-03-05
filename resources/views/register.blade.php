@@ -29,55 +29,35 @@
                     @endif
                     <form method="POST" action="{{ route('startquiz') }}">
                         @csrf
-
-                        {{-- <div class="form-group row">
-                            <label for="student_number"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Student Number') }}</label>
-                            <div class="col-md-6">
-                                <input id="student_number" type="text"
-                                    class="form-control @error('student_number') is-invalid @enderror"
-                                    name="student_number" value="{{ old('student_number') }}" autofocus>
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label for="name"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}</label>
+                                class="col-md-4 col-form-label text-md-right">ชื่อ - นามสกุล</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') }}" autofocus>
+                                    name="name" value="{{ old('name') }}" autofocus required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="email"
-                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                class="col-md-4 col-form-label text-md-right">เบอร์โทรศัพท์</label>
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" autofocus>
+                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                    value="{{ old('phone') }}" autofocus required onKeyUp="validateInput(this.value);">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="quiz_id" class="col-md-4 col-form-label text-md-right">{{ __('Exam') }}</label>
+                            <label for="quiz_id"
+                                class="col-md-4 col-form-label text-md-right">ชุดข้อสอบ</label>
                             <div class="col-md-6">
-                                <select id="quiz_search" name="quiz_id" class="form-control" value="" @error('quiz_id')
-                                    is-invalid @enderror">
+                                <select style="width: 100%" id="quiz_search" name="quiz_id" class="form-control" value="" @error('quiz_id') is-invalid @enderror">
                                 </select>
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label for="access_code"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Access Code') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="access_code" type="password"
-                                    class="form-control @error('access_code') is-invalid @enderror" name="access_code"
-                                    autocomplete="current-password">
-                            </div>
-                        </div> --}}
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-darken">
                                     เริ่มทำข้อสอบ
-                                    {{-- {{ __('Login') }} --}}
                                 </button>
                             </div>
                         </div>
@@ -92,8 +72,24 @@
 
 @section('scripts')
 <script>
+    function validateInput(value) {
+    if (isNaN(value)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'กรุณากรอกตัวเลขเบอร์โทรศัพท์',
+            text: '',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+
+        // Clear the input field
+        document.getElementById('phone').value = '';
+    }
+}
+</script>
+<script>
 $('#quiz_search').select2({
-    placeholder: '-- เลือกหลักสูตร --',
+    placeholder: '-- เลือกข้อสอบ --',
     ajax: {
         url: '/quiz_search_active',
         dataType: 'json',
@@ -112,4 +108,5 @@ $('#quiz_search').select2({
     }
 });
 </script>
+
 @endsection

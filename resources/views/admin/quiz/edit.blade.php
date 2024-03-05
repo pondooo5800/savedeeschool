@@ -225,8 +225,9 @@ Edit Quiz | {{ config('settings.name', 'Laravel') }}
 <script>
 $(document).ready(function() {
 
+    $('#status').select2();
     $('#course_search').select2({
-        placeholder: '-- Select Course --',
+        placeholder: '-- เลือกหลักสูตร --',
         ajax: {
             url: '/course_search',
             dataType: 'json',

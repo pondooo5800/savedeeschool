@@ -125,7 +125,7 @@ class StudentController extends Controller
         // TODO insert into DB student details.
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
-            'email' => 'required',
+            'phone' => 'required',
             // 'student_number' => 'required',
             'quiz_id' => 'required',
             // 'access_code' => 'required',
@@ -133,13 +133,13 @@ class StudentController extends Controller
 
         $validator->validate();
         // Check if user exist.
-        $student = Student::where('email', $request->input('email'))->first();
+        $student = Student::where('phone', $request->input('phone'))->first();
         if ($student == null)
         {
             $student_number = 'SD' . random_int(10000000, 99999999);
             $data =[
                 'name'=>$request->input('name'),
-                'email'=>$request->input('email'),
+                'phone'=>$request->input('phone'),
                 'quiz_id'=>$request->input('quiz_id'),
                 'student_number'=>$student_number,
             ];

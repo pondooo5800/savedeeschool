@@ -20,16 +20,14 @@ class StartQuizController extends Controller
         $quiz_id = $request->route('quiz_id');
 
         // Check if user eligible to
-        if (!session()->has('user'))
-        {
+        if (!session()->has('user')) {
             return view('register')->with('error', 'You are not eligible to access the quiz.');
         }
         // If quiz started redirect user to his/her current question.
         $user_quiz = UserQuiz::where('quiz_id', $quiz_id)->where('user_id', $request->session()->get('user'))->where('status', 'Started')->first();
         $user_c_quiz = UserQuiz::where('quiz_id', $quiz_id)->where('user_id', $request->session()->get('user'))->where('status', 'Completed')->first();
 
-        if ($user_c_quiz && $user_c_quiz->quiz->retake == 0)
-        {
+        if ($user_c_quiz && $user_c_quiz->quiz->retake == 0) {
             return view('exam')->with('error', 'You\'ve taken the quiz on ' . date('d M y', $user_c_quiz->start_time));
         }
 
@@ -39,15 +37,13 @@ class StartQuizController extends Controller
 
         $quiz = Quiz::where('course_id', $course_id)->where('id', $quiz_id)->where('status', 'Active')->first();
 
-        if ($quiz == null)
-        {
+        if ($quiz == null) {
             return view('exam')->with('error', 'Course does not exist or does not contain the quiz. Please contact administrator.');
         }
 
-        if (((new \DateTime("now"))->getTimestamp() + 8*60*60) <= strtotime($quiz->available_on))
-        {
+        if (((new \DateTime("now"))->getTimestamp() + 8 * 60 * 60) <= strtotime($quiz->available_on)) {
             $invalid = 'The quiz is not available yet!';
-            return view('exam', compact('quiz','invalid'));
+            return view('exam', compact('quiz', 'invalid'));
         }
 
         return view('exam')->with('quiz', $quiz);
@@ -75,17 +71,23 @@ class StartQuizController extends Controller
 
 
         $question_ids = [];
-//   dd($quiz_id);
-//   dd($quiz->number_qns);
-        if ($quiz->random_qns == 1) {
-            $randIndex = array_rand($all_question_ids, $quiz->number_qns);
-            foreach ($randIndex as $i) {
-                $question_ids[] = $all_question_ids[$i];
+        //   dd($quiz_id);
+        //   dd($quiz->number_qns);
+        if (
+            $quiz->random_qns == 1
+        ) {
+            if ($quiz->number_qns <= count($all_question_ids)) {
+                $randIndex = array_rand($all_question_ids, $quiz->number_qns);
+
+                foreach ($randIndex as $i) {
+                    $question_ids[] = $all_question_ids[$i];
+                }
+
+                $this->shuffle_assoc($question_ids);
+            } else {
+                $question_ids = $all_question_ids;
             }
-            $this->shuffle_assoc($question_ids);
-        }
-        else
-        {
+        } else {
             $question_ids = array_slice($all_question_ids, 0, $quiz->qns_number);
         }
         $question_answers = "{\"qns_ans\":[";
@@ -131,7 +133,7 @@ class StartQuizController extends Controller
                     $pos = $i + 1;
                     $quizans = $list[$i]['ans_text'];
                     $qns_review =  $list[$i]['qns_review'];
-                break;
+                    break;
                 }
             }
             return view('question', compact('user_quiz', 'qns', 'quizans', 'pos', 'qns_review'));
@@ -168,7 +170,7 @@ class StartQuizController extends Controller
                     $pos = $i + 1;
                     $quizans = $list[$i]['ans_text'];
                     $qns_review = $list[$i]['qns_review'];
-                break;
+                    break;
                 }
             }
             return view('question', compact('user_quiz', 'qns', 'quizans', 'pos', 'qns_review'));
@@ -195,10 +197,8 @@ class StartQuizController extends Controller
 
         if ($qnsans == null) {
             $qnsans = [];
-        }
-        else
-        {
-            if (! is_array($qnsans))
+        } else {
+            if (!is_array($qnsans))
                 $qnsans = [$qnsans];
         }
         $next_qns_id = 0;
@@ -208,8 +208,7 @@ class StartQuizController extends Controller
 
         $user_quiz = UserQuiz::where('quiz_id', $quiz_id)->where('user_id', $user_id)->where('status', 'Started')->first();
         if ($user_quiz != null) {
-            if ($action == 'complete-quiz')
-            {
+            if ($action == 'complete-quiz') {
                 $user_quiz->end_time = new \DateTime("now");
             }
 
@@ -219,7 +218,7 @@ class StartQuizController extends Controller
             $last_qns = "0";
 
             for ($i = 0; $i < count($list); $i++) {
-                if ( $list[$i]['qns_id'] == $question_id) {
+                if ($list[$i]['qns_id'] == $question_id) {
                     // Store result to current.
                     $list[$i]['ans_text'] = $qnsans;
                     $list[$i]['qns_review'] = $qns_review;
@@ -263,13 +262,11 @@ class StartQuizController extends Controller
             $qns_ans_list['qns_ans'] = $list;
             $user_quiz->question_answers = $qns_ans_list;
 
-            if ($action == 'complete-quiz')
-            {
+            if ($action == 'complete-quiz') {
                 $total_correct = 0;
                 $arr_obj = [];
                 $result = "{ \"results\": [";
-                for ($j=0; $j< count($list); $j++)
-                {
+                for ($j = 0; $j < count($list); $j++) {
                     $q = Question::find($list[$j]['qns_id']);
                     $correct_answer = json_decode($q->question_answers, true)['answer'];
                     $object = new \stdClass();
@@ -278,56 +275,41 @@ class StartQuizController extends Controller
                     $object->question_type = $q->question_type;
                     $object->question_options = array_column($q->get_options_list(), 'name');
 
-                    if ($q->question_type === 'Single Choice' || $q->question_type === 'True Or False')
-                    {
+                    if ($q->question_type === 'Single Choice' || $q->question_type === 'True Or False') {
                         $object->correct_ans = [$correct_answer[0]['name']];
-                    }
-                    else
-                    {
+                    } else {
                         $object->correct_ans = array_column($correct_answer, 'name');
                     }
 
-                    if (!empty($list[$j]['ans_text']))
-                    {
+                    if (!empty($list[$j]['ans_text'])) {
                         $object->selected_ans = $list[$j]['ans_text'];
 
-                        if ($q->question_type === 'Single Choice' || $q->question_type === 'True Or False')
-                        {
-                            if ($list[$j]['ans_text'][0] == $object->correct_ans[0])
-                            {
+                        if ($q->question_type === 'Single Choice' || $q->question_type === 'True Or False') {
+                            if ($list[$j]['ans_text'][0] == $object->correct_ans[0]) {
                                 $total_correct++;
                                 $object->mark = 'Correct';
 
-                                $result .= "{\"name\": \"Correct\", \"qns_id\": ". $q->id."} ,";
-                            }
-                            else
-                            {
+                                $result .= "{\"name\": \"Correct\", \"qns_id\": " . $q->id . "} ,";
+                            } else {
                                 $object->mark = 'Wrong';
-                                $result .= "{\"name\": \"Wrong\", \"qns_id\": ". $q->id."} ,";
+                                $result .= "{\"name\": \"Wrong\", \"qns_id\": " . $q->id . "} ,";
                             }
-                        }
-                        else
-                        {
+                        } else {
                             $check = array_diff($object->selected_ans, $object->correct_ans);
-                            if (empty($check))
-                            {
+                            if (empty($check)) {
                                 $total_correct++;
                                 $object->mark = 'Correct';
 
-                                $result .= "{\"name\": \"Correct\", \"qns_id\": ". $q->id."} ,";
-                            }
-                            else
-                            {
+                                $result .= "{\"name\": \"Correct\", \"qns_id\": " . $q->id . "} ,";
+                            } else {
                                 $object->mark = 'Wrong';
-                                $result .= "{\"name\": \"Wrong\", \"qns_id\": ". $q->id."} ,";
+                                $result .= "{\"name\": \"Wrong\", \"qns_id\": " . $q->id . "} ,";
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $object->selected_ans = [];
                         $object->mark = 'Wrong';
-                        $result .= "{\"name\": \"Wrong\", \"qns_id\": ". $q->id."} ,";
+                        $result .= "{\"name\": \"Wrong\", \"qns_id\": " . $q->id . "} ,";
                     }
                     $arr_obj[] = $object;
                 }
@@ -337,7 +319,7 @@ class StartQuizController extends Controller
                 $user_quiz->results = $result;
                 $user_quiz->total_correct = $total_correct;
                 $total_question = count($list);
-                $user_quiz->score = ( $total_correct / $total_question ) * 100;
+                $user_quiz->score = ($total_correct / $total_question) * 100;
                 $user_quiz->status = 'Completed';
                 $user_quiz->grade = ($user_quiz->score >= $user_quiz->quiz->passing_grade) ? 'Passed' : 'Failed';
                 $user_quiz->time_taken = $user_quiz->end_time->getTimestamp() -  strtotime($user_quiz->start_time);
@@ -352,9 +334,7 @@ class StartQuizController extends Controller
                 // return redirect()->route('quiz_result', ['course_id' => $course_id, 'quiz_id' => $quiz_id])
                 //         ->with( ['user_quiz' => $user_quiz, 'arr_obj' => $arr_obj, 'total_correct'=> $total_correct, 'total_question' => $total_question ] );
                 return redirect()->route('quiz_result', ['course_id' => $course_id, 'quiz_id' => $quiz_id]);
-            }
-            else
-            {
+            } else {
                 $user_quiz = tap($user_quiz)->update()->fresh();
                 $qns = Question::find($user_quiz->current_question);
 
@@ -363,9 +343,7 @@ class StartQuizController extends Controller
                 }
                 return view('question', compact('user_quiz', 'qns', 'quizans', 'pos', 'qns_review', 'last_qns'));
             }
-        }
-        else
-        {
+        } else {
             return view('register')->with('error', 'You have not started a quiz. Please contact administrator.');
         }
     }

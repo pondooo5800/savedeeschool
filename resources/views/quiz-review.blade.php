@@ -36,9 +36,13 @@
                             <span class="review-title">{{ $user_quiz->quiz->title }}</span>
                         </div>
                         <div class="progress-item text-right">
-                            <a href="{{ route('send_result_email', ['course_id' => $user_quiz->quiz->course_id, 'quiz_id' => $user_quiz->quiz->id]) }}"
+                            {{-- <a href="{{ route('send_result_email', ['course_id' => $user_quiz->quiz->course_id, 'quiz_id' => $user_quiz->quiz->id]) }}"
                                 class="btn btn-darken">
                                 ส่งผลคะแนนไปที่อีเมล
+                            </a> --}}
+                            <a href="{{ url('register')}}"
+                                class="btn btn-darken">
+                                จบการทำข้อสอบ
                             </a>
                         </div>
                     </div>

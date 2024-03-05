@@ -81,7 +81,7 @@ Add Quiz | {{ config('settings.name', 'Laravel') }}
                             <div class="form-group">
                                 <strong>สุ่มคำถาม:</strong>
                                 <div class="custom-control custom-checkbox">
-                                    <input {{ old('random_qns') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
+                                    <input checked {{ old('random_qns') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
                                         class="custom-control-input" name="random_qns" id="random_qns">
                                     <label class="custom-control-label" for="random_qns">นักเรียนแต่ละคนจะได้รับชุดคำถามที่แตกต่างกัน</label>
                                 </div>
@@ -98,7 +98,7 @@ Add Quiz | {{ config('settings.name', 'Laravel') }}
                             <div class="form-group">
                                 <strong>คำถามการแบ่งหน้า:</strong>
                                 <div class="custom-control custom-checkbox">
-                                    <input {{old('show_pagination') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
+                                    <input checked {{old('show_pagination') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
                                         class="custom-control-input" name="show_pagination" id="show_pagination">
                                     <label class="custom-control-label" for="show_pagination">แสดงรายการคำถามขณะทำแบบทดสอบตามลำดับหมายเลข (1, 2, 3 ฯลฯ)</label>
                                 </div>
@@ -108,7 +108,7 @@ Add Quiz | {{ config('settings.name', 'Laravel') }}
                             <div class="form-group">
                                 <strong>คำถามทบทวน:</strong>
                                 <div class="custom-control custom-checkbox">
-                                    <input {{ old('review_qns') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
+                                    <input checked {{ old('review_qns') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
                                         class="custom-control-input" name="review_qns" id="review_qns">
                                     <label class="custom-control-label" for="review_qns">อนุญาตให้ทบทวนคำถามหลังจากทำแบบทดสอบเสร็จแล้ว</label>
                                 </div>
@@ -118,7 +118,7 @@ Add Quiz | {{ config('settings.name', 'Laravel') }}
                             <div class="form-group">
                                 <strong>แสดงคำตอบที่ถูกต้อง:</strong>
                                 <div class="custom-control custom-checkbox">
-                                    <input {{ old('show_answer') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
+                                    <input checked {{ old('show_answer') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
                                         class="custom-control-input" name="show_answer" id="show_answer">
                                     <label class="custom-control-label" for="show_answer">แสดงคำตอบที่ถูกต้องเมื่อทบทวนคำถาม</label>
                                 </div>
@@ -128,7 +128,7 @@ Add Quiz | {{ config('settings.name', 'Laravel') }}
                             <div class="form-group">
                                 <strong>อัตราแบบทดสอบ:</strong>
                                 <div class="custom-control custom-checkbox">
-                                    <input {{ old('allow_rate') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
+                                    <input checked {{ old('allow_rate') == 'on'  ? 'checked=checked' : ''}} type="checkbox"
                                         class="custom-control-input" name="allow_rate" id="allow_rate">
                                     <label class="custom-control-label" for="allow_rate">อนุญาตให้นักเรียนเห็นคะแนนแบบทดสอบหลังจากเสร็จสิ้นแบบทดสอบ</label>
                                 </div>

@@ -149,30 +149,33 @@
                             @endif
                         </div>
                         <br />
-                        <div class="row">
-                            <div class="col-6">
-                                <input type="hidden" name="question_type" value="{{ $qns->question_type }}">
-                                <input type="hidden" name="question_id" value={{ $qns->id }}>
-                                <input type="hidden" name="quiz_id" value={{ $qns->quiz_id }}>
-                                <input type="hidden" name="course_id" value={{ $qns->quiz->course_id }}>
-                                <button type="submit" class="btn btn-primary" name="action" value="prev">ก่อนหน้า</button>
-                                <button type="submit" class="btn btn-primary" name="action" value="next">ถัดไป</button>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox"
-                                            {{$qns_review == 1  ? 'checked=checked' : ''}} name="qns_review">
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                ทำเครื่องหมายเพื่อตรวจสอบ
+                       <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <input type="hidden" name="question_type" value="{{ $qns->question_type }}">
+                            <input type="hidden" name="question_id" value="{{ $qns->id }}">
+                            <input type="hidden" name="quiz_id" value="{{ $qns->quiz_id }}">
+                            <input type="hidden" name="course_id" value="{{ $qns->quiz->course_id }}">
+
+                            <button type="submit" class="btn btn-primary" name="action" value="prev">ก่อนหน้า</button>
+                            <button type="submit" class="btn btn-primary" name="action" value="next">ถัดไป</button>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" {{ $qns_review==1 ? 'checked=checked' : '' }}
+                                        name="qns_review">
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
                             </div>
-                            <div class="col-6 text-right">
-                                <button type="submit" id="complete-quiz" class="btn btn-primary" name="action"
-                                    value="complete-quiz">สิ้นสุดการทำข้อสอบ</button>
-                            </div>
+                            ทำเครื่องหมายเพื่อตรวจสอบ
                         </div>
+
+                        <div class="col-md-6 col-sm-12 text-md-right">
+                            <button type="submit" id="complete-quiz" class="btn btn-primary" name="action"
+                                value="complete-quiz">สิ้นสุดการทำข้อสอบ</button>
+                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -195,7 +198,11 @@ var x = setInterval(timer, 1000);
 var last_qns = "<?php echo $last_qns ?? '' ?>";
 
 if (last_qns == '1') {
-    alert('นี่เป็นคำถามสุดท้าย หากคุณต้องการที่จะจบการสอบ');
+    Swal.fire({
+    title: "แจ้งเตือน",
+    text: "นี่เป็นคำถามสุดท้าย หากคุณต้องการที่จะจบการสอบ? โปรดกดปุ่มสิ้นสุดการทำข้อสอบ",
+    icon: "question"
+    });
 }
 
 $(document).keydown(function(event) {

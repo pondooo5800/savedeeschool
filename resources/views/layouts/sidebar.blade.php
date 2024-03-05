@@ -34,8 +34,8 @@
                     <i class="material-icons">local_library</i>
                     <p>Student</p>
                 </a>
-            </li> --}}
-            {{-- <li class="nav-item {{ Request::is('rating/*') || Request::is('rating') ? 'active' : '' }}">
+            </li>
+            <li class="nav-item {{ Request::is('rating/*') || Request::is('rating') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('rating.index') }}">
                     <i class="material-icons">star_half</i>
                     <p>Rating</p>
@@ -46,8 +46,8 @@
                     <i class="material-icons">emoji_events</i>
                     <p>View Result</p>
                 </a>
-            </li> --}}
-            {{-- <li class="nav-item  {{ Request::is('settings/*') || Request::is('settings') ? 'active' : '' }}">
+            </li>
+            <li class="nav-item  {{ Request::is('settings/*') || Request::is('settings') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('settings.index') }}">
                     <i class="material-icons">settings</i>
                     <p>ตั้งค่า</p>
