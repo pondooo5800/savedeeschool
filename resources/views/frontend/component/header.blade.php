@@ -10,7 +10,7 @@
     <div class="container">
         <nav class="navbar navbar-dark navbar-expand-lg py-0">
             <a href="{{ url('/') }}" class="navbar-brand">
-                    <img class="img-fluid" style="max-width: 100%; height: 100px;" src="{{asset('assets/frontend/logo/logo.jpg')}}">
+                    <img class="img-fluid" style="max-width: 100%; height: 70px;" src="{{asset('assets/frontend/logo/logo.jpg')}}">
             </a>
             <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
                 data-bs-target="#navbarCollapse" style="background-color:#ffc107 ">

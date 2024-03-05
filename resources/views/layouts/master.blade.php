@@ -127,13 +127,13 @@
     <script src="{{ asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     @php
-        $currentPath = request()->path();
-        $firstSegment = request()->segment(2);
-        $lastSegment = request()->segment(3);
+    $currentPath = request()->path();
+    $firstSegment = request()->segment(2);
+    $lastSegment = request()->segment(3);
     @endphp
     @if ($firstSegment === 'create' || $lastSegment === 'edit')
     @else
-        <script src="{{ asset('assets/js/material-dashboard.js?v=2.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/material-dashboard.js?v=2.1.2') }}" type="text/javascript"></script>
     @endif
     <!-- DataTable -->
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
@@ -160,7 +160,20 @@
     <script>
         $('#summernote').summernote({
                         tabsize: 2,
-                        height: 500
+                        height: 500,
+                       callbacks: {
+                        onPaste: function (e) {
+                        // Get the plain text content from the clipboard
+                        var clipboardData = (e.originalEvent || e).clipboardData;
+                        var pastedText = clipboardData.getData('text/plain');
+
+                        // Insert the plain text content without styles
+                        document.execCommand('insertText', false, pastedText);
+
+                        // Prevent the default paste behavior
+                        e.preventDefault();
+                        }
+                        }
                       });
     </script>
     </script>
