@@ -112,8 +112,9 @@
                                         }
                                         } elseif ($qns->question_type == 'Single Choice') {
                                         if (count($quizans) > 0) {
-                                        foreach ($qns->get_options_list() as $q) {
+                                        foreach ($qns->get_options_list() as $key => $q) {
                                         echo '<tr class="answer-option">';
+                                            echo '<input type="hidden" id="text-answer_'.$key.'" value="' . $q->name . '">';
                                             echo '<td class="answer-correct"><input type="radio" name="qns_ans" value="' .
                                                                     $q->name .
                                                                     '" ' .
@@ -121,7 +122,10 @@
                                                                         ? ' checked="checked"'
                                                                         : '') .
                                                                     '></td>';
-                                            echo '<td>' . $q->name . '</td>';
+                                           echo '<td><span class="px-2">' . $q->name . '</span><button type="button" class="btn btn-primary btn-sm"
+                                                    onclick="responsiveVoice.speak($(\'#text-answer_'.$key.'\').val(), $(\'#voiceselection\').val());">';
+                                                    echo '<span><i class="fa fa-volume-up"></i></span></button>';
+                                                echo '</td>';
                                             echo '</tr>';
                                         }
                                         } else {
