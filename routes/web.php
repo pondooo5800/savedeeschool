@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\LicenseController;
+use App\Http\Controllers\Admin\RegisterlineController;
 use App\Http\Controllers\EmailController;
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('video-update', [VideoController::class, 'update']);
     Route::delete('del-video', [VideoController::class, 'destroy']);
     Route::resource('license', LicenseController::class);
+    Route::resource('register-line', RegisterlineController::class);
 
 
     Route::get('gallery', [VideoController::class, 'index_gallery']);

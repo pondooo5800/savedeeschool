@@ -89,6 +89,11 @@
                       <span class="sidebar-normal"> การทำใบขับขี่และเตรียมทำข้อสอบ </span>
                     </a>
                   </li>
+                  <li class="nav-item {{ Request::is('register-line/*') || Request::is('register-line') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('register-line') }}">
+                      <span class="sidebar-normal"> จำนวนผู้สมัครเรียน </span>
+                    </a>
+                  </li>
                 </ul>
               </div>
         </ul>
