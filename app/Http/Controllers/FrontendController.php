@@ -28,7 +28,7 @@ class FrontendController extends Controller
     {
         $slide = Slide::all();
         $cours = Course::all();
-        $blog = Blog::all();
+        $blog =Blog::take(6)->get();
         $video = Video::all();
         return view('frontend.index')->with([
             'slides' => $slide,
@@ -143,7 +143,7 @@ class FrontendController extends Controller
         $res = $this->notify_message($str, $token);
         print_r($str);
         // die();
-        return redirect()->back()->with('success', 'สมัครเรียนเรียบร้อยแล้ว');
+        return redirect()->back()->with('success', 'ส่งข้อมูลสำเร็จ');
 
     }
 }

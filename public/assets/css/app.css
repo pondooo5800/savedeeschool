@@ -455,6 +455,15 @@ span.item-name {
     display: flex;
 }
 
+@media only screen and (max-width: 576px) {
+    .progress-items {
+        display: block !important;
+        text-align: center;
+        line-height: 1;
+    }
+
+}
+
 .quiz-progress .progress-items .progress-item {
     flex: 1;
     position: relative;

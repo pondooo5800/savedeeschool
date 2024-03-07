@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Edit Question | {{ config('settings.name', 'Laravel') }}
+แก้ไข คำถาม | {{ config('settings.name', 'Laravel') }}
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@ Edit Question | {{ config('settings.name', 'Laravel') }}
         <div class="card">
             <div class="card-header">
                 <div class="pull-left">
-                    <h4 class="card-title"><i class="material-icons card-icon">question_answer</i> Edit Question</h4>
+                    <h4 class="card-title"><i class="material-icons card-icon">question_answer</i> แก้ไข คำถาม</h4>
                 </div>
                 <div class="pull-right">
                     <a class="btn btn-darken" href="{{ route('question.index') }}"> กลับ</a>
@@ -45,21 +45,21 @@ Edit Question | {{ config('settings.name', 'Laravel') }}
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Question:</strong>
+                                <strong>คำถาม:</strong>
                                 <textarea class="form-control" name="question"
                                     placeholder="question">{{ $question->question }}</textarea>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Description:</strong>
+                                <strong>รายละเอียด:</strong>
                                 <textarea class="form-control" name="description"
                                     placeholder="description">{{ $question->description }}</textarea>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Quiz :</strong>
+                                <strong>แบบทดสอบ :</strong>
                                 <input type="text" value="{{ $question->quiz->title }}" class="form-control"
                                     disabled="true">
                                 <input type="hidden" name="quiz_id" value="{{ $question->quiz_id }}" />
@@ -70,7 +70,7 @@ Edit Question | {{ config('settings.name', 'Laravel') }}
                             <div id="admin-editor-lp_question" class="answer_panel">
                                 <div class="data_head clearfix">
                                     <h3 class="heading">
-                                        Question Answers
+                                       คำถามและคำตอบ
                                     </h3>
                                     <div class="toolbar_actions">
                                         <select name="question_type" class="question_type" id="type_option">
@@ -92,10 +92,8 @@ Edit Question | {{ config('settings.name', 'Laravel') }}
                                         <thead>
                                             <tr>
                                                 <th class="order">#</th>
-                                                <th class="answer-text">Answer Text <small class="hint"><em>Leave blank
-                                                            if you want
-                                                            to delete the option</em></small></th>
-                                                <th class="answer-correct">Correct?</th>
+                                                <th class="answer-text">ข้อความคำตอบ <small class="hint"><em>ว้นว่างไว้หากคุณต้องการลบตัวเลือก</em></small></th>
+                                                <th class="answer-correct">ถูกต้อง?</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ui-sortable">
@@ -128,9 +126,8 @@ Edit Question | {{ config('settings.name', 'Laravel') }}
                                         <thead>
                                             <tr>
                                                 <th class="order">#</th>
-                                                <th class="answer-text">Answer Text <small><em>Leave blank if you want
-                                                            to delete the option</em></small></th>
-                                                <th class="answer-correct">Correct?</th>
+                                                <th class="answer-text">ข้อความคำตอบ <small class="hint"><em>ว้นว่างไว้หากคุณต้องการลบตัวเลือก</em></small></th>
+                                                <th class="answer-correct">ถูกต้อง?</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ui-sortable">
@@ -169,9 +166,8 @@ Edit Question | {{ config('settings.name', 'Laravel') }}
                                         <thead>
                                             <tr>
                                                 <th class="order">#</th>
-                                                <th class="answer-text">Answer Text <small><em>Leave blank if you want
-                                                            to delete the option</em></small></th>
-                                                <th class="answer-correct">Correct?</th>
+                                                <th class="answer-text">ข้อความคำตอบ <small class="hint"><em>ว้นว่างไว้หากคุณต้องการลบตัวเลือก</em></small></th>
+                                                                                                <th class="answer-correct">ถูกต้อง?</th>
                                             </tr>
                                         </thead>
                                         <tbody class="ui-sortable">
@@ -210,7 +206,7 @@ Edit Question | {{ config('settings.name', 'Laravel') }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-darken">Submit</button>
+                            <button type="submit" class="btn btn-darken">ตกลง</button>
                         </div>
                     </div>
                 </form>

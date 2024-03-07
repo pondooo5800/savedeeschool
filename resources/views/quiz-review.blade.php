@@ -1,5 +1,13 @@
 @extends('layouts.app')
-
+@section('styles')
+    <style>
+.mobile{
+display: block !important;
+text-align: center;
+line-height: 1;
+}
+    </style>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center ">
@@ -58,8 +66,8 @@
                                 <td> &nbsp;{{ $user_quiz->student->student_number }}</td>
                             </tr>
                             <tr>
-                                <th> อีเมล: </th>
-                                <td> &nbsp;{{ $user_quiz->student->email }}</td>
+                                <th> เบอร์โทรศัพท์: </th>
+                                <td> &nbsp;{{ $user_quiz->student->phone }}</td>
                             </tr>
                             <tr>
                                 <th> วันที่ทำข้อสอบ: </th>
@@ -73,26 +81,25 @@
                             <span class="progress-number correct-label">
                                 {{ $user_quiz->total_correct }} / {{ $user_quiz->quiz->number_qns }}
                             </span>
-                            <span class="progress-label"><i class="material-icons">assignment_turned_in</i>Marks
-                                Obtained</span>
+                            <span class="progress-label" style="font-size: medium"><i class="material-icons">assignment_turned_in</i>จำนวนข้อ</span>
                         </div>
                         <div class="progress-item grade-label">
                             <span class="progress-number correct-label">
-                                {{ $user_quiz->score }}%
+                                {{ number_format($user_quiz->score, 2) }}%
                             </span>
-                            <span class="progress-label"><i class="material-icons">analytics</i>Your Score</span>
+                            <span class="progress-label" style="font-size: medium"><i class="material-icons">analytics</i>คะแนน</span>
                         </div>
                         <div class="progress-item quiz-countdown">
-                            <span class="progress-number correct-label">
+                            <span class="progress-number correct-label ">
                                 {{ $user_quiz->get_timetaken_html() }}
                             </span>
-                            <span class="progress-label"><i class="material-icons">watch_later</i>Time Taken</span>
+                            <span class="progress-label" style="font-size: medium"><i class="material-icons">watch_later</i>เวลา</span>
                         </div>
                         <div class="progress-item quiz-countdown">
                             <span class="progress-number correct-label">
-                                {{ $user_quiz->grade }}
+                                {{ $user_quiz->grade === 'Passed' ? 'ผ่าน' : 'ไม่ผ่าน'}}
                             </span>
-                            <span class="progress-label"><i class="material-icons">emoji_events</i>Result</span>
+                            <span class="progress-label" style="font-size: medium"><i class="material-icons">emoji_events</i>ผลลัพธ์</span>
                         </div>
                     </div>
                 </div>
@@ -151,7 +158,7 @@
                                 <i style="color:red;" class="material-icons">cancel</i>
                                 @endif
                             </td>
-                            <td><strong>Question {{ $loop->index + 1 }}.</strong> <br />
+                            <td><strong>ข้อ {{ $loop->index + 1 }}.</strong> <br />
                                 <p class="p-qns-title">@php
                                     echo nl2br($item->question_title);
                                     @endphp </p>

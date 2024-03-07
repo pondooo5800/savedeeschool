@@ -238,8 +238,7 @@ Student | {{ config('settings.name', 'Laravel') }}
                                     {{ $row->score }}
                                 </td>
                                 <td>
-                                    <span
-                                        class="badge badge-{{ ($row->grade =='Passed') ? 'success' : 'danger'}}">{{ $row->grade }}</span>
+                                    <span class="badge badge-{{ ($row->grade =='Passed') ? 'success' : 'danger'}}">{{ $row->grade }}</span>
                                 </td>
                                 <td class="text-right">
                                     <a class="btn-icon btn-darken" href="{{ route('result.show', $row->id) }}"

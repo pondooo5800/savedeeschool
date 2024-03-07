@@ -1,6 +1,41 @@
 @extends('layouts.app')
-
 @section('content')
+<style>
+    .radio-card {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .radio-card:hover {
+        background-color: #f5f5f5;
+    }
+
+    .radio-card.selected {
+        background-color: #cceaff;
+    }
+
+    .radio-input {
+        display: none;
+    }
+
+    .card-header {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .btn {
+        margin-left: auto;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center ">
         @if (isset($error))
@@ -16,14 +51,14 @@
                 <div class="card-header quiz-progress">
                     <div class="progress-items">
                         <div class="progress-item quiz-current-question">
-                            <span class="progress-number">
-                                {{ $pos }} / {{ $qns->quiz->number_qns }} </span>
-                            <span class="progress-label">
+                            <strong><span class="progress-number">
+                                {{ $pos }} / {{ $qns->quiz->number_qns }} </span></strong>
+                            <span class="progress-label" style="font-size: large">
                                 คำถาม </span>
                         </div>
                         <div class="progress-item quiz-countdown">
-                            <span id="timer" class="progress-number"></span>
-                            <span class="progress-label">
+                            <strong><span id="timer" class="progress-number"></span></strong>
+                            <span class="progress-label"style="font-size: large">
                                 เวลาที่เหลืออยู่ </span>
                         </div>
                     </div>
@@ -35,18 +70,18 @@
                             <div class="col-md-8">
                                 @if($qns->image_name)
                                 <div class="qns-img">
-                                    <img src="{{ asset('uploads/'.$qns->image_name) }}" style="width: 200px;">
+                                    <img src="{{ asset('uploads/'.$qns->image_name) }}" style="width: 100%;">
                                 </div>
                                 @endif
                                 <br />
-                                <div class="question-text">
+                                <div class="question-text" style="font-size: larger;">
                                     @php
                                     echo nl2br($qns->question);
                                     @endphp
                                     <button type="button" class="btn btn-primary btn-sm" onclick="responsiveVoice.speak($('#text').val(),$('#voiceselection').val());"><span><i class="fa fa-volume-up"></i></span></button>
                                 </div>
-
-                                <table class="question-answers">
+                <hr>
+                                <table class="question-answers" style="font-size: larger;">
                                     <tbody>
                                         @php
                                         if ($qns->question_type == 'True Or False') {
@@ -113,34 +148,58 @@
                                         } elseif ($qns->question_type == 'Single Choice') {
                                         if (count($quizans) > 0) {
                                         foreach ($qns->get_options_list() as $key => $q) {
-                                        echo '<tr class="answer-option">';
-                                            echo '<input type="hidden" id="text-answer_'.$key.'" value="' . $q->name . '">';
-                                            echo '<td class="answer-correct"><input type="radio" name="qns_ans" value="' .
-                                                                    $q->name .
-                                                                    '" ' .
-                                                                    ($quizans[0] == $q->name
-                                                                        ? ' checked="checked"'
-                                                                        : '') .
-                                                                    '></td>';
-                                           echo '<td><span class="px-2">' . $q->name . '</span><button type="button" class="btn btn-primary btn-sm"
-                                                    onclick="responsiveVoice.speak($(\'#text-answer_'.$key.'\').val(), $(\'#voiceselection\').val());">';
-                                                    echo '<span><i class="fa fa-volume-up"></i></span></button>';
-                                                echo '</td>';
-                                            echo '</tr>';
+                                          echo '<label for="radio-card-' . $key . '"
+                                            class="radio-card d-flex justify-content-between ' . ($quizans[0] == $q->name ? 'selected' : '') . '">';
+                                            echo '<input type="hidden" id="text-answer_' . $key . '" value="' . $q->name . '">';
+                                            echo '<input type="radio" name="qns_ans" value="' . $q->name . '" ' . ($quizans[0] == $q->name ? '
+                                                checked="checked"' : '') . ' id="radio-card-' . $key . '" class="radio-input">';
+                                            echo '<div class="card-content-wrapper">
+                                                <div class="card-body">
+                                                    <h5 style="color:#000">' . $q->name . '</h5>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                onclick="responsiveVoice.speak($(\'#text-answer_' . $key . '\').val(), $(\'#voiceselection\').val());">
+                                                <span><i class="fa fa-volume-up"></i></span>
+                                            </button>';
+                                            echo '</label>';
+                                        // echo '<tr class="answer-option">';
+                                        //     echo '<input type="hidden" id="text-answer_'.$key.'" value="' . $q->name . '">';
+                                        //     echo '<td class="answer-correct"><input type="radio" name="qns_ans" value="' .
+                                        //                             $q->name .
+                                        //                             '" ' .
+                                        //                             ($quizans[0] == $q->name ? ' checked="checked"' : '') .'></td>';
+                                        //    echo '<td><span class="px-2">' . $q->name . '</span><button type="button" class="btn btn-primary btn-sm"
+                                        //             onclick="responsiveVoice.speak($(\'#text-answer_'.$key.'\').val(), $(\'#voiceselection\').val());">';
+                                        //             echo '<span><i class="fa fa-volume-up"></i></span></button>';
+                                        //         echo '</td>';
+                                        //     echo '</tr>';
                                         }
                                         } else {
                                         foreach ($qns->get_options_list()  as $key => $q) {
-                                        echo '<tr class="answer-option">';
-                                            echo '<td class="answer-correct">';
-                                                echo '<input type="hidden" id="text-answer_'.$key.'" value="' . $q->name . '">';
-                                                echo '<input type="radio" name="qns_ans" value="' . $q->name . '">';
-                                                echo '</td>';
-                                            echo '<td><span class="px-2">' . $q->name . '</span><button type="button" class="btn btn-primary btn-sm"
+                                             echo '<label for="radio-card-'.$key.'" class="radio-card d-flex justify-content-between">';
+                                                 echo '<input type="hidden" id="text-answer_'.$key.'" value="' . $q->name . '">';
+                                                 echo '<input type="radio" name="qns_ans" value="' . $q->name . '" id="radio-card-'.$key.'" class="radio-input" />';
+                                                 echo ' <div class="card-content-wrapper">
+                                                     <div class="card-body">
+                                                         <h5 style="color:#000">' . $q->name . '</h5>
+                                                         </div>
+                                                     </div>
+                                                 <button type="button" class="btn btn-primary btn-sm"
                                                     onclick="responsiveVoice.speak($(\'#text-answer_'.$key.'\').val(), $(\'#voiceselection\').val());">';
-                                                    echo '<span><i class="fa fa-volume-up"></i></span></button>';
-                                                echo '</td>';
-                                            echo '</tr>';
-                                        }
+                                                     echo '<span><i class="fa fa-volume-up"></i></span></button>';
+                                                 echo' </label>';
+                                            // echo '<tr class="answer-option">';
+                                            //     echo '<td class="answer-correct">';
+                                            //         echo '<input type="hidden" id="text-answer_'.$key.'" value="' . $q->name . '">';
+                                            //         echo '<input type="radio" name="qns_ans" value="' . $q->name . '">';
+                                            //         echo '</td>';
+                                            //     echo '<td><span class="px-2">' . $q->name . '</span><button type="button" class="btn btn-primary btn-sm"
+                                            //             onclick="responsiveVoice.speak($(\'#text-answer_'.$key.'\').val(), $(\'#voiceselection\').val());">';
+                                            //             echo '<span><i class="fa fa-volume-up"></i></span></button>';
+                                            //         echo '</td>';
+                                            //     echo '</tr>';
+                                            }
                                         }
                                         }
                                         @endphp
@@ -181,7 +240,7 @@
                                         </span>
                                     </label>
                                 </div>
-                                ทำเครื่องหมายเพื่อตรวจสอบ
+                               กลับมาตรวจสอบ
                             </div>
 
                             <div class="col-md-6 col-sm-12 text-md-right">
@@ -196,6 +255,23 @@
         @endif
     </div>
 </div>
+<script>
+    const radioCards = document.querySelectorAll('.radio-card');
+
+radioCards.forEach(radioCard => {
+  radioCard.addEventListener('click', () => {
+    // ยกเลิกการเลือก radio card อื่นๆ
+    const otherRadioCards = document.querySelectorAll('.radio-card.selected');
+    otherRadioCards.forEach(otherRadioCard => {
+      otherRadioCard.classList.remove('selected');
+    });
+
+    // เลือก radio card นี้
+    radioCard.classList.add('selected');
+  });
+});
+</script>
+
 @endsection
 
 @section('scripts')

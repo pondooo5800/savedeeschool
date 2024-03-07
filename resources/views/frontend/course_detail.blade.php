@@ -5,7 +5,7 @@
 @section('content')
 <div class="container py-3">
     @if ($message = Session::get('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success text-center">
         <p>{{ $message }}</p>
     </div>
     @endif
@@ -39,7 +39,7 @@
                                             <input type="text" required name="phone" class="form-control border-0 py-2" placeholder="เบอร์โทร">
                                         </div>
                                         <div class="mb-4">
-                                            <input type="text" required name="line" class="form-control border-0 py-2" placeholder="Line ID">
+                                            <input type="text" name="line" class="form-control border-0 py-2" placeholder="Line ID">
                                         </div>
                                         <div class="mb-4">
                                             <select required class="form-select border-0 py-2" aria-label="Default select example" name="course">
@@ -50,7 +50,7 @@
                                             </select>
                                         </div>
                                         <div class="text-center">
-                                            <button class="btn bg-primary text-white" type="submit">สมัครเรียน</button>
+                                            <button class="btn bg-primary text-white" type="submit">บันทึกและส่งข้อมูล</button>
                                         </div>
               </form>
         </div>

@@ -1,5 +1,10 @@
 @extends('layouts.frontend')
 @section('styles')
+<style>
+    .phone-contact{
+        font-weight: 400;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -24,7 +29,7 @@
             <p class="mb-2"><a target="_blank" href="https://page.line.me/yoz5198g?openQrModal=true">Savedee Driver
                     School </a></p>
             @if ($message = Session::get('success'))
-            <div class="alert alert-success">
+            <div class="alert alert-success text-center">
                 <p>{{ $message }}</p>
             </div>
             @endif
@@ -38,13 +43,13 @@
                             <i class="fas fa-map-marker-alt text-white"></i>
                         </div>
                         <div class="ms-3">
-                            <h6 class="text-primary">สำนักงานใหญ่</h6>
+                            <h5 class="text-primary">สำนักงานใหญ่</h5>
                             166/7 ถ.มหาจักรพรรดิ ต.หน้าเมือง อ.เมือง จ.ฉะเชิงเทรา 24000 (ก่อนถึงสถานีรถไฟ ฉะเชิงเทรา)
                             <br><br>
-                            <h6 class="text-primary">สนามฝึกหัดขับรถ</h6>
+                            <h5 class="text-primary">สนามฝึกหัดขับรถ</h5>
                             166/7 ถ.มหาจักรพรรดิ ต.หน้าเมือง อ.เมือง จ.ฉะเชิงเทรา 24000 (ก่อนถึงสถานีรถไฟ ฉะเชิงเทรา)
                             <br><br>
-                            <h6 class="text-primary">เลขที่ประจำตัวผู้เสียภาษี</h6>
+                            <h5 class="text-primary">เลขที่ประจำตัวผู้เสียภาษี</h5>
                             0-2455-59001-69-2
                         </div>
                     </div>
@@ -56,18 +61,18 @@
                             <i class="fa fa-phone text-white"></i>
                         </div>
                         <div class="ms-3">
-                            <h4 class="text-primary">เบอร์ติดต่อ</h4>
-                            <a class="h5" href="tel:0385119489" target="_blank">038-511948-9</a>
+                            <h5 class="text-primary">เบอร์ติดต่อ</h5>
+                            <a class="h5 phone-contact" href="tel:0385119489" target="_blank">038-511948-9</a>
                             <br>
-                            <a class="h5" href="tel:0335907013" target="_blank">033-590701-3</a>
+                            <a class="h5 phone-contact" href="tel:0335907013" target="_blank">033-590701-3</a>
                             <br>
-                            <a class="h5" href="tel:0879772187" target="_blank">087-9772187</a>
+                            <a class="h5 phone-contact" href="tel:0879772187" target="_blank">087-9772187</a>
                             <br>
-                            <a class="h5" href="tel:0830748548" target="_blank">083-0748548</a>
+                            <a class="h5 phone-contact" href="tel:0830748548" target="_blank">083-0748548</a>
                             <br>
-                            <a class="h5" href="tel:0889307289" target="_blank">088-9307289</a>
+                            <a class="h5 phone-contact" href="tel:0889307289" target="_blank">088-9307289</a>
                             <br>
-                            <a class="h5" href="tel:0918708915" target="_blank">091-8708915</a>
+                            <a class="h5 phone-contact" href="tel:0918708915" target="_blank">091-8708915</a>
                         </div>
                     </div>
                 </div>
@@ -78,8 +83,8 @@
                             <i class="fa fa-envelope text-white"></i>
                         </div>
                         <div class="ms-3">
-                            <h4 class="text-primary">Email Us</h4>
-                            <a class="h5" href="mailto:savedee.driver@hotmail.com"
+                            <h6 class="text-primary">อีเมล</h6>
+                            <a class="h5 phone-contact" href="mailto:savedee.driver@hotmail.com"
                                 target="_blank">savedee.driver@hotmail.com</a>
                         </div>
                     </div>
@@ -89,12 +94,12 @@
                             <i class="fab fa-facebook text-white"></i>
                         </div>
                         <div class="ms-3">
-                            <a class="h5" href="https://www.facebook.com/savedeeschool/" target="_blank">Savedee
+                            <a class="h5 phone-contact" href="https://www.facebook.com/savedeeschool/" target="_blank">Savedee
                                 School</a>
                             <br>
-                            <a class="h5" href="https://www.facebook.com/Savedeecafe/" target="_blank">Savedee Cafe</a>
+                            <a class="h5 phone-contact" href="https://www.facebook.com/Savedeecafe/" target="_blank">Savedee Cafe</a>
                             <br>
-                            <a class="h5" href="https://www.facebook.com/savedeebrokers/" target="_blank">Savedee
+                            <a class="h5 phone-contact" href="https://www.facebook.com/savedeebrokers/" target="_blank">Savedee
                                 Brokers</a>
                         </div>
                     </div>
@@ -104,7 +109,7 @@
                             <i class="fab fa-line text-white"></i>
                         </div>
                         <div class="ms-3 justify-content-center align-self-center">
-                            <a class="h5 " href="https://page.line.me/yoz5198g?openQrModal=true"
+                            <a class="h5 phone-contact" href="https://page.line.me/yoz5198g?openQrModal=true"
                                 target="_blank">@Savedee</a>
                         </div>
                     </div>
@@ -133,7 +138,7 @@
                                     placeholder="เบอร์โทร">
                             </div>
                             <div class="mb-4">
-                                <input type="text" required name="line" class="form-control border-0 py-2"
+                                <input type="text" name="line" class="form-control border-0 py-2"
                                     placeholder="Line ID">
                             </div>
                             <div class="mb-4">
@@ -146,7 +151,7 @@
                                 </select>
                             </div>
                             <div class="text-center">
-                                <button class="btn bg-primary text-white" type="submit">สมัครเรียน</button>
+                                <button class="btn bg-primary text-white" type="submit">บันทึกและส่งข้อมูล</button>
                             </div>
                         </form>
                     </div>

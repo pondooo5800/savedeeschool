@@ -155,24 +155,24 @@
         integrity="sha512-FJ2OYvUIXUqCcPf1stu+oTBlhn54W0UisZB/TNrZaVMHHhYvLBV9jMbvJYtvDe5x/WVaoXZ6KB+Uqe5hT2vlyA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-    <script>
+<script>
         $('#summernote').summernote({
-                        tabsize: 2,
-                        height: 500,
-                       callbacks: {
-                        onPaste: function (e) {
-                        // Get the plain text content from the clipboard
-                        var clipboardData = (e.originalEvent || e).clipboardData;
-                        var pastedText = clipboardData.getData('text/plain');
+                    tabsize: 2,
+                    height: 500,
+                    // callbacks: {
+                    // onPaste: function (e) {
+                    // // Get the plain text content from the clipboard
+                    // var clipboardData = (e.originalEvent || e).clipboardData;
+                    // var pastedText = clipboardData.getData('text/plain');
 
-                        // Insert the plain text content without styles
-                        document.execCommand('insertText', false, pastedText);
+                    // // Insert the plain text content without styles
+                    // document.execCommand('insertText', false, pastedText);
 
-                        // Prevent the default paste behavior
-                        e.preventDefault();
-                        }
-                        }
-                      });
+                    // // Prevent the default paste behavior
+                    // e.preventDefault();
+                    // }
+                    // }
+                    });
     </script>
     </script>
     @yield('scripts')

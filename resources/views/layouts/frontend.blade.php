@@ -27,6 +27,15 @@
             font-family: "Kanit",sans-serif;
         }
     </style>
+    <style>
+    @media only screen and (max-width: 992px) {
+        iframe {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 16 / 9;
+        }
+    }
+    </style>
     @yield('styles')
 </head>
 

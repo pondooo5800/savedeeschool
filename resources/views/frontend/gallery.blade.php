@@ -7,7 +7,7 @@
   }
 
   body {
-    margin: 1.5rem 0 3.5rem;
+    margin: 1.5rem 0 0rem;
   }
 
   @keyframes zoomin {
@@ -134,7 +134,7 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 gallery-grid">
           @foreach ($gallerys ?? '' as $row)
           <div class="col">
-            <a class="gallery-item" href="{{ url('/'.$row->image)}}">
+            <a class="gallery-item" href="{{ asset($row->image) }}">
               <img src="{{ asset($row->image) }}" class="img-fluid" alt="Lorem ipsum dolor sit amet">
             </a>
           </div>
