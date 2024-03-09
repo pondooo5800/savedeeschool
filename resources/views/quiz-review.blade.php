@@ -48,6 +48,9 @@ line-height: 1;
                                 class="btn btn-darken">
                                 ส่งผลคะแนนไปที่อีเมล
                             </a> --}}
+                            @if(session()->has('name'))
+                            <?php session()->forget('name'); ?>
+                            @endif
                             <a href="{{ url('register')}}"
                                 class="btn btn-darken">
                                 จบการทำข้อสอบ

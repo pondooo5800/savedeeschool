@@ -495,7 +495,8 @@ span.item-name {
 }
 
 .question-text {
-    min-height: 200px;
+    /* min-height: 200px; */
+    min-height: auto;
     letter-spacing: 0.3px;
     font-weight: 600;
 }

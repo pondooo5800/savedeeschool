@@ -16,11 +16,18 @@
     </div>
 </div>
 <!-- Page Header End -->
-<!-- Blog Start -->
-<div class="container-fluid blog py-3">
-    <div class="container">
-        {!! $licenses->content !!}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <article class="blog-details">
+                <div class="post-img mb-3 text-center">
+                    <img src="{{ asset('licenses/'.$licenses->imageName) }}" alt="" class="img-fluid">
+                </div>
+                <div class="content">
+                   {!! $licenses->content !!}
+                </div>
+            </article>
+        </div>
     </div>
 </div>
-
 @endsection

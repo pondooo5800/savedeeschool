@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
     <title>โรงเรียนสอนขับรถเซฟดี ไดรฟ์เวอร์ - โรงเรียนสอนขับรถ พร้อมสอบใบขับขี่ อบรมใบขับขี่ รับรองโดยกรมการขนส่งทางบก</title>
-    <meta name="description"
-        content="เสริมสร้างความรู้ ทักษะการขับขี่ การใช้รถใช้ถนนอย่างปลอดภัยการทำใบขับขี่ครั้งแรก เริ่มจากตรงไหน มีขั้นตอนอย่างไรฝึกทำข้อสอบเสมือนจริง" />
+    <meta name="description" content="โรงเรียนสอนขับรถเซฟดี ไดรฟ์เวอร์ - โรงเรียนสอนขับรถ พร้อมสอบใบขับขี่ อบรมใบขับขี่ รับรองโดยกรมการขนส่งทางบก ใบขับขี่รถ ต่อใบขับขี่ โรงเรียนสอนขับรถ">
+    <meta name="keywords" content="ใบขับขี่รถ ต่อใบขับขี่ โรงเรียนสอนขับรถ">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="เซฟดีโรงเรียนสอนขับรถ" name="keywords">
 
     <link rel="icon" type="image/x-icon" href="{{asset('assets/frontend/img/favicon.png')}}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">

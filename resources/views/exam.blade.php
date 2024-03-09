@@ -12,9 +12,6 @@
         </div>
         @else
         <div class="col-md-12">
-            <span style="color: #fff;font-size:large" class="item-name"> {{ $quiz->course->title }} > <strong>{{ $quiz->title }}</strong> </span>
-        </div>
-        <div class="col-md-12">
             <div class="card">
                 <div class="card-header quiz-header ">
                     <h3>{{ $quiz->title }}</h3>

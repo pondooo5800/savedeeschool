@@ -307,6 +307,7 @@ class StartQuizController extends Controller
                             }
                         }
                     } else {
+                        return redirect()->back()->with('error', 'Course does not exist or does not contain the quiz');
                         $object->selected_ans = [];
                         $object->mark = 'Wrong';
                         $result .= "{\"name\": \"Wrong\", \"qns_id\": " . $q->id . "} ,";

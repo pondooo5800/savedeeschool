@@ -35,6 +35,17 @@
     .btn {
         margin-left: auto;
     }
+    .img-mobile{
+        width: 550px;
+        height: 350px;
+    }
+    @media only screen and (max-width: 992px) {
+    .img-mobile{
+        width: 100%;
+        height: auto !important;;
+        }
+
+    }
 </style>
 <div class="container">
     <div class="row justify-content-center ">
@@ -46,6 +57,9 @@
             <strong>พบปัญหา!</strong> {{ $error }}<br><br>
         </div>
         @else
+        <div class="col-md-12">
+            <span style="color: #fff;font-size:large" class="item-name"><strong>{{ (Session::get('name')) }}</strong> </span>
+        </div>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header quiz-progress">
@@ -69,8 +83,8 @@
                         <div class="row">
                             <div class="col-md-8">
                                 @if($qns->image_name)
-                                <div class="qns-img">
-                                    <img src="{{ asset('uploads/'.$qns->image_name) }}" style="width: 100%;">
+                                <div class="qns-img text-center">
+                                    <img class="img-mobile" src="{{ asset('uploads/'.$qns->image_name) }}">
                                 </div>
                                 @endif
                                 <br />
@@ -275,6 +289,16 @@ radioCards.forEach(radioCard => {
 @endsection
 
 @section('scripts')
+@if(session('error'))
+<script>
+           Swal.fire({
+            title: 'พบข้อผิดพลาด!',
+            text: 'โปรดทำข้อสอบให้ครบทุกข้อ',
+            icon: 'error',
+            confirmButtonText: 'ตกลง'
+            });
+</script>
+@endif
 <script>
     var voicelist = responsiveVoice.getVoices();
         var vselect = $("#voiceselection");

@@ -7,15 +7,10 @@
                 <p class="mb-2 text-light">สำนักงานใหญ่ : 166/7 ถ.มหาจักรพรรดิ ต.หน้าเมือง อ.เมือง จ.ฉะเชิงเทรา 24000 (ก่อนถึงสถานีรถไฟ ฉะเชิงเทรา)</p>
                 <p class="mt-1 mb-4 text-light">สนามฝึกหัดขับรถ : 16/6 ม.1 ต.บางพระ อ.เมือง จ.ฉะเชิงเทรา 24000 (ซอยวัดผา -วัดท่าอิฐ)</p>
                 <div class="d-flex hightech-link">
-                    <a href="https://www.facebook.com/savedeeschool"
-                        class="btn-light nav-fill btn btn-square rounded-circle me-2"><i
+                    <a href="https://www.facebook.com/savedeeschool" class="btn-light nav-fill btn btn-square rounded-circle me-2"><i
                             class="fab fa-facebook-f text-primary"></i></a>
-                    <a href="" class="btn-light nav-fill btn btn-square rounded-circle me-2"><i
-                            class="fab fa-twitter text-primary"></i></a>
-                    <a href="" class="btn-light nav-fill btn btn-square rounded-circle me-2"><i
+                    <a href="https://www.instagram.com/savedee_driver?igsh=NTB2ZTExMGNjaGFt" class="btn-light nav-fill btn btn-square rounded-circle me-2"><i
                             class="fab fa-instagram text-primary"></i></a>
-                    <a href="" class="btn-light nav-fill btn btn-square rounded-circle me-0"><i
-                            class="fab fa-linkedin-in text-primary"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6">
@@ -38,9 +33,9 @@
                 <a href="#" class="h3 text-secondary">Short Link</a>
                 <div class="mt-4 d-flex flex-column help-link">
                     <a href="{{ url('all-gallery') }}" class="mb-2 text-white"><i
-                            class="fas fa-angle-right text-secondary me-2"></i>Gallery</a>
+                            class="fas fa-angle-right text-secondary me-2"></i>รูปภาพ</a>
                     <a href="{{ url('all-video') }}" class="mb-2 text-white"><i
-                            class="fas fa-angle-right text-secondary me-2"></i>Video</a>
+                            class="fas fa-angle-right text-secondary me-2"></i>วีดีโอ</a>
                     <a href="{{'register'}}" class="mb-2 text-white"><i
                             class="fas fa-angle-right text-secondary me-2"></i>ฝึกทำข้อสอบ</a>
                 </div>

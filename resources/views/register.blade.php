@@ -31,7 +31,7 @@
                         @csrf
                         <div class="form-group row">
                             <label for="name"
-                                class="col-md-4 col-form-label text-md-right">ชื่อ - นามสกุล</label>
+                                class="col-md-4 col-form-label text-md-right">ชื่อ - นามสกุล <span style="color:red"> *</span></label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') }}" autofocus required>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="email"
-                                class="col-md-4 col-form-label text-md-right">เบอร์โทรศัพท์</label>
+                                class="col-md-4 col-form-label text-md-right">เบอร์โทรศัพท์<span style="color:red"> *</span></label>
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
                                     value="{{ old('phone') }}" autofocus required onKeyUp="validateInput(this.value);">
@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="quiz_id"
-                                class="col-md-4 col-form-label text-md-right">ชุดข้อสอบ</label>
+                                class="col-md-4 col-form-label text-md-right">ชุดข้อสอบ<span style="color:red"> *</span></label>
                             <div class="col-md-6">
                                 <select style="width: 100%" id="quiz_search" name="quiz_id" class="form-control" value="" @error('quiz_id') is-invalid @enderror">
                                 </select>

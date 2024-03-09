@@ -94,8 +94,8 @@ Add Question | {{ config('settings.name', 'Laravel') }}
                                     </h3>
                                     <div class="toolbar_actions">
                                         <select name="question_type" class="question_type" id="type_option">
-                                            <option value="True Or False" selected="selected">จริงหรือเท็จ</option>
-                                            <option value="Multi Choice">หลายทางเลือก</option>
+                                            {{-- <option value="True Or False" selected="selected">จริงหรือเท็จ</option>
+                                            <option value="Multi Choice">หลายทางเลือก</option> --}}
                                             <option value="Single Choice">ทางเลือกเดียว</option>
                                         </select>
                                     </div>

@@ -69,6 +69,9 @@
                             <th>
                                 ID Line
                             </th>
+                            <th>
+                                วันที่สมัคร
+                            </th>
 
                         </thead>
                         <tbody>
@@ -88,6 +91,9 @@
                                 </td>
                                 <td>
                                     {{ $row->line }}
+                                </td>
+                                <td>
+                                   {{ date("d/m/Y", strtotime($row->created_at)) }}
                                 </td>
 
                             </tr>

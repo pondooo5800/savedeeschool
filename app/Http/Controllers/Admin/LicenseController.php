@@ -72,7 +72,7 @@ class LicenseController extends Controller
         ]);
         License::create($request->all());
         return redirect()->route('license.index')
-            ->with('success', 'สร้าง บทความ (รอบรู้เรื่องขับขี่) เรียบร้อย');
+            ->with('success', 'สร้าง ข้อมูลเรียบร้อย');
     }
 
     public function show(License $license)
@@ -114,7 +114,7 @@ class LicenseController extends Controller
         foreach ($images as $key => $img) {
             if (strpos($img->getAttribute('src'), 'data:image/') === 0) {
                 $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
-                $image_name = "/license/" . time() . $key . '.png';
+                $image_name = "/licenses/" . time() . $key . '.png';
                 file_put_contents(public_path() . $image_name, $data);
 
                 $img->removeAttribute('src');

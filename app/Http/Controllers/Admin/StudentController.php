@@ -90,7 +90,7 @@ class StudentController extends Controller
             'dob' => 'required',
             'gender' => 'required',
             'email' => 'required',
-            'student_number' => 'required|unique:students,student_number,' .$student->student_number ,
+            'student_number' => 'required|unique:students,student_number,' . $student->student_number,
         ]);
 
         $validator->validate();
@@ -126,22 +126,23 @@ class StudentController extends Controller
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
             'phone' => 'required',
-            // 'student_number' => 'required',
             'quiz_id' => 'required',
-            // 'access_code' => 'required',
+        ], [
+            'name.required' => 'กรอกข้อมูล  ชื่อ',
+            'phone.required' => 'กรอกข้อมูล เบอร์โทรศัพท์',
+            'quiz_id.required' => 'กรอกข้อมูล  ชุดข้อสอบ',
         ]);
 
         $validator->validate();
         // Check if user exist.
         $student = Student::where('phone', $request->input('phone'))->first();
-        if ($student == null)
-        {
+        if ($student == null) {
             $student_number = 'SD' . random_int(10000000, 99999999);
-            $data =[
-                'name'=>$request->input('name'),
-                'phone'=>$request->input('phone'),
-                'quiz_id'=>$request->input('quiz_id'),
-                'student_number'=>$student_number,
+            $data = [
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'quiz_id' => $request->input('quiz_id'),
+                'student_number' => $student_number,
             ];
             $student = Student::create($data);
         }
@@ -154,37 +155,40 @@ class StudentController extends Controller
             'current_quiz' => $request->input('quiz_id')
         ]);
         $request->session()->put('user', $student->id);
+        $request->session()->put('name', $request->input('name'));
         return view('exam')->with('quiz', $quiz);
-
     }
 
     public function search(Request $request)
     {
         $keyword = $request->get('term');
-        $results = Student::where('name', 'like', '%'.$keyword.'%')->orWhere('student_number', 'like', '%'.$keyword.'%')->select('id', 'name', 'student_number')->get();
+        $results = Student::where('name', 'like', '%' . $keyword . '%')->orWhere('student_number', 'like', '%' . $keyword . '%')->select('id', 'name', 'student_number')->get();
         return response()->json($results);
     }
 
-    public function enroll(Request $request, $id) {
+    public function enroll(Request $request, $id)
+    {
         $student = Student::where('id', $id)->first();
         $courseList = $request->input('courseList');
         $student->courses()->syncWithoutDetaching($courseList);
         return view('admin.student.show', compact('student'));
     }
 
-    public function unenroll(Request $request, $id, $sid) {
+    public function unenroll(Request $request, $id, $sid)
+    {
         $student = Student::where('id', $sid)->first();
         $student->courses()->detach($id);
         return view('admin.student.show', compact('student'));
     }
 
-    function timeDifference($start, $stop){
+    function timeDifference($start, $stop)
+    {
 
         $diff = $stop - $start;
-        $fullHours   = floor($diff/(60*60));
-        $fullMinutes = floor(($diff-($fullHours*60*60))/60);
-        $fullSeconds = floor($diff-($fullHours*60*60)-($fullMinutes*60));
+        $fullHours   = floor($diff / (60 * 60));
+        $fullMinutes = floor(($diff - ($fullHours * 60 * 60)) / 60);
+        $fullSeconds = floor($diff - ($fullHours * 60 * 60) - ($fullMinutes * 60));
 
-        return sprintf("%02d",$fullHours) . ":" . sprintf("%02d",$fullMinutes) . ":" . sprintf("%02d",$fullSeconds);
+        return sprintf("%02d", $fullHours) . ":" . sprintf("%02d", $fullMinutes) . ":" . sprintf("%02d", $fullSeconds);
     }
 }
